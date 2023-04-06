@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.entrega1.vista;
+package com.entrega2.vista;
 
-import com.entrega1.modelo.ReferenciaLibro;
+import com.entrega2.modelo.ReferenciaLibro;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
@@ -14,15 +14,15 @@ import javax.swing.SpinnerNumberModel;
  * @author jagarci
  * @author mgonzal
  */
-public class Vista extends javax.swing.JFrame {
-    private Controlador miControlador;
+public class VistaEdicion extends javax.swing.JFrame {
+    private ControladorEdicion miControlador;
     
     /**
      * Creates new form NewJFrame
      */
-    public Vista() {
+    public VistaEdicion() {
         initComponents();
-        miControlador=new Controlador(this);
+        miControlador=new ControladorEdicion(this);
         // Hago que no pueda poner numeros negativos en ninguno de los spinner
         ((SpinnerNumberModel) unidadesSpinner.getModel()).setMinimum(0);
         ((SpinnerNumberModel) decimalesSpinner.getModel()).setMinimum(0);
@@ -91,7 +91,6 @@ public class Vista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(308, 160));
-        setPreferredSize(new java.awt.Dimension(308, 160));
         setSize(new java.awt.Dimension(900, 450));
 
         jPanel1.setMinimumSize(new java.awt.Dimension(10, 25));

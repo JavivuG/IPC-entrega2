@@ -2,25 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.entrega1.vista;
+package com.entrega2.vista;
 
-import com.entrega1.modelo.Modelo;
-import com.entrega1.modelo.ReferenciaLibro;
+import com.entrega2.modelo.Modelo;
+import com.entrega2.modelo.ReferenciaLibro;
 
 /**
  * Clase que representa el controlador de la aplicación, consulta/actualiza los elementos de la vista e informacion del modelo
  * @author jagarci
  * @author mgonzal
  */
-public class Controlador {
+public class ControladorEdicion {
     private Modelo miModelo; // Modelo de la aplicación
-    private Vista miVista; // Vista de la aplicación
+    private VistaEdicion miVista; // VistaEdicion de la aplicación
     
     /**
      * Constructor del controlador. Inicializa el modelo
-     * @param vista Vista de la aplicacion. 
+     * @param vista VistaEdicion de la aplicacion. 
      */
-    public Controlador(Vista vista){
+    public ControladorEdicion(VistaEdicion vista){
         this.miVista=vista;
         this.miModelo=new Modelo();
     }
