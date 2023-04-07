@@ -22,6 +22,7 @@ public class GestorVistas {
             vistaActual.dispose();
         }
         vistaActual = new VistaInicial();
+        vistaActual.setMinimumSize(new Dimension(320,240)); // Cambio tamaño minimo de la vista
         vistaActual.setVisible(true);
     }
     

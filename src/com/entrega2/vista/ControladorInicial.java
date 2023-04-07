@@ -20,6 +20,7 @@ public class ControladorInicial {
      */
     public ControladorInicial(VistaInicial vista){
         this.miVista=vista;
+        setContadores();
     }
     
     public void procesarRedireccionEdicion(){
@@ -28,5 +29,19 @@ public class ControladorInicial {
     
     public void procesarRedireccionBusqueda(){
         Main.getGestorVistas().mostrarVistaBusqueda();
+    }
+    
+    public void setContadores(){
+        if (miVista.getCantidadLibros().equals("")){
+            miVista.setCantidadLibros("0");
+        }
+        
+        if (miVista.getPrecioMedio().equals("")){
+            miVista.setPrecioMedio("0");
+        }
+        
+        if (miVista.getLibrosLeidos().equals("")){
+            miVista.setLibrosLeidos("0/0");
+        }
     }
 }

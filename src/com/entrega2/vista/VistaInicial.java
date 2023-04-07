@@ -10,6 +10,7 @@ package com.entrega2.vista;
  */
 public class VistaInicial extends javax.swing.JFrame {
     private ControladorInicial controlador;
+    
 
     /**
      * Creates new form VistaInicial
@@ -29,14 +30,70 @@ public class VistaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        totalLibrosLabel = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        leidosLabel = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        precioMedioLabel = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         edicionButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         busquedaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel3.setLayout(new java.awt.GridLayout(4, 0));
+
+        jPanel7.setMinimumSize(new java.awt.Dimension(20, 28));
+        jPanel7.setPreferredSize(new java.awt.Dimension(643, 20));
+        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+
+        jLabel2.setText("Nº total de libros:");
+        jPanel7.add(jLabel2);
+        jPanel7.add(totalLibrosLabel);
+
+        jPanel3.add(jPanel7);
+
+        jPanel8.setPreferredSize(new java.awt.Dimension(643, 20));
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+
+        jLabel3.setText("Nº de libros leídos/no leídos:");
+        jPanel8.add(jLabel3);
+        jPanel8.add(leidosLabel);
+
+        jPanel3.add(jPanel8);
+
+        jPanel9.setPreferredSize(new java.awt.Dimension(643, 20));
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+
+        jLabel4.setText("Precio medio de los libros:");
+        jPanel9.add(jLabel4);
+        jPanel9.add(precioMedioLabel);
+
+        jPanel3.add(jPanel9);
+        jPanel3.add(jPanel6);
+
         getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 10));
+
+        jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 22)); // NOI18N
+        jLabel1.setText("Bienvenido");
+        jPanel2.add(jLabel1);
+
         getContentPane().add(jPanel2, java.awt.BorderLayout.NORTH);
+
+        jPanel1.setLayout(new java.awt.GridLayout(2, 0));
+
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
 
         edicionButton.setText("Edición manual de Biblioteca");
         edicionButton.addActionListener(new java.awt.event.ActionListener() {
@@ -44,7 +101,11 @@ public class VistaInicial extends javax.swing.JFrame {
                 edicionButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(edicionButton);
+        jPanel4.add(edicionButton);
+
+        jPanel1.add(jPanel4);
+
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
 
         busquedaButton.setText("Búsqueda de libros");
         busquedaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +113,9 @@ public class VistaInicial extends javax.swing.JFrame {
                 busquedaButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(busquedaButton);
+        jPanel5.add(busquedaButton);
+
+        jPanel1.add(jPanel5);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -67,12 +130,48 @@ public class VistaInicial extends javax.swing.JFrame {
         this.controlador.procesarRedireccionBusqueda();
     }//GEN-LAST:event_busquedaButtonActionPerformed
 
+    public String getPrecioMedio(){
+        return precioMedioLabel.getText();
+    }
+    
+    public void setPrecioMedio(String precioMedio){
+        precioMedioLabel.setText(precioMedio);
+    }
+    
+    public String getLibrosLeidos(){
+        return leidosLabel.getText();
+    }
+    
+    public void setLibrosLeidos(String librosLeidos){
+        leidosLabel.setText(librosLeidos);
+    }
+    
+    public String getCantidadLibros(){
+        return totalLibrosLabel.getText();
+    }
+    
+    public void setCantidadLibros(String cantidadLibros){
+        totalLibrosLabel.setText(cantidadLibros);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton busquedaButton;
     private javax.swing.JButton edicionButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel leidosLabel;
+    private javax.swing.JLabel precioMedioLabel;
+    private javax.swing.JLabel totalLibrosLabel;
     // End of variables declaration//GEN-END:variables
 }

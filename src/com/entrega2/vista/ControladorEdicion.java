@@ -4,6 +4,7 @@
  */
 package com.entrega2.vista;
 
+import com.entrega2.main.Main;
 import com.entrega2.modelo.Modelo;
 import com.entrega2.modelo.ReferenciaLibro;
 
@@ -137,5 +138,14 @@ public class ControladorEdicion {
                 miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
             }
         }
+    }
+    
+    public void procesarRedirrecionInicial(){
+        Main.getGestorVistas().mostrarVistaInicial();
+    }
+    
+        
+    public void procesarRedirrecionBusqueda(){
+        Main.getGestorVistas().mostrarVistaBusqueda();
     }
 }

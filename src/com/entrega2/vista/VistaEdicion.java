@@ -40,6 +40,9 @@ public class VistaEdicion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel11 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         errorLabel = new javax.swing.JLabel();
@@ -92,6 +95,26 @@ public class VistaEdicion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(308, 160));
         setSize(new java.awt.Dimension(900, 450));
+
+        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jButton1);
+
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jButton2);
+
+        getContentPane().add(jPanel11, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setMinimumSize(new java.awt.Dimension(10, 25));
         jPanel1.setPreferredSize(new java.awt.Dimension(10, 25));
@@ -382,6 +405,14 @@ public class VistaEdicion extends javax.swing.JFrame {
         seleccionElementosLista(evt);
     }//GEN-LAST:event_borrarButtonKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.miControlador.procesarRedirrecionInicial();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.miControlador.procesarRedirrecionBusqueda();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * Selecciona o deja de seleccionar elementos de una lista
      * Selecciona un elemento si se pulsa un tecla entre 1 y 9 
@@ -546,6 +577,8 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> estadoComboBox;
     private javax.swing.JLabel exitoLabel;
     private javax.swing.JButton guardarButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
@@ -553,6 +586,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
