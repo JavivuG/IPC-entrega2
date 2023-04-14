@@ -28,21 +28,27 @@ public class ReferenciaLibro {
      * @param leido Si el libro se ha leido o no
      */
     public ReferenciaLibro(String titulo, String descripcion, String isbn, String estado, int unidades, int decimales, boolean leido){
-        this.isbn = isbn;
-        setTitulo(titulo);
-        setDescripcion(descripcion);
-        setLeido(leido);
-        setPrecio(unidades, decimales);
-        setEstado(estado);
+        if (compruebaLibro(titulo, isbn)==0){
+            this.isbn = isbn;
+            setTitulo(titulo);
+            setDescripcion(descripcion);
+            setLeido(leido);
+            setPrecio(unidades, decimales);
+            setEstado(estado);
+        }
+
     }
     
     public ReferenciaLibro(String titulo, String descripcion, String isbn, String estado, double precio, boolean leido){
-        this.isbn = isbn;
-        setTitulo(titulo);
-        setDescripcion(descripcion);
-        setLeido(leido);
-        setPrecio(precio);
-        setEstado(estado);
+        if (compruebaLibro(titulo, isbn)==0){
+            this.isbn = isbn;
+            setTitulo(titulo);
+            setDescripcion(descripcion);
+            setLeido(leido);
+            setPrecio(precio);
+            setEstado(estado);
+        }
+
     }
     
     /**
@@ -134,12 +140,8 @@ public class ReferenciaLibro {
     }
     
     public void setPrecio(int unidades, int decimales){
-        int n = (int)Math.log10(decimales)+1;
-        if (n==1){
-            n=2;
-        }
-        Double decimalesDouble = (double)unidades/(Math.pow(10, n));
-        this.precio=  unidades+decimalesDouble;
+        String precio=unidades+"."+decimales;
+        this.precio = Double.parseDouble(precio);
     }
     
     
@@ -159,6 +161,20 @@ public class ReferenciaLibro {
         this.leido = leido;
     }
     
+    // Comprueba que la información para un libro es correcta
+    public int compruebaLibro(String titulo, String isbn){
+        int tipoError=0;
+        String error = "";
+
+        if (titulo.length() < 1 || titulo.length() > 20){
+            tipoError=1;
+        }
+        if (isbn.length() < 1 || isbn.length() > 13){
+            tipoError=2;
+        }
+        
+        return tipoError;
+    }
     
     /**
      * Proporciona un String para representar el libro

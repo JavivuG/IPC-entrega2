@@ -32,6 +32,10 @@ public class ControladorBusqueda {
     public ControladorBusqueda(VistaBusqueda vista){
         this.miVista=vista;
         this.miModelo=Main.getBiblioteca();
+        ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
+        if (listaLibros.size()>0){
+            miVista.actualizaListaLibros(listaLibros);
+        }
     }
     
     public void procesarRedirrecionInicial(){
@@ -73,12 +77,15 @@ public class ControladorBusqueda {
                 }
 
                 if (!error){
-                    miModelo.addLibro(new ReferenciaLibro(titulo, descripcion, isbn, estado, precio, leido));
-                    contadorLibros++;   
+                    ReferenciaLibro libro=new ReferenciaLibro(titulo, descripcion, isbn, estado, precio, leido);
+                    if (miModelo.addLibro(libro)){
+                        contadorLibros++;   
+                    }
                 }
                 contadorLineas++;
             }
             if (contadorLibros>0){
+                miVista.actualizaListaLibros(miModelo.getListaLibros());
                 miVista.mostrarMensajeExito("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero");
             }
             else {
@@ -107,6 +114,16 @@ public class ControladorBusqueda {
             escritor.close();
         } catch (IOException e){
             miVista.mostrarMensajeError("No se puedo crear el fichero de exportación");
+        }
+    }
+    
+    public void procesarEventoEditar(){
+        int indice=miVista.getElementoListaSeleccionado();
+        if (indice!=-1){
+            Main.getGestorVistas().mostrarVistaEdicion(miModelo.getListaLibros().get(indice), indice);
+        }
+        else {
+            miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
         }
     }
 }

@@ -44,25 +44,41 @@ public class ControladorEdicion {
         boolean leido=miVista.isLeidoLibro();
         int unidades = miVista.getUnidadesLibro();
         int decimales = miVista.getDecimalesLibro();
-        
+        String mensajeError="";
         boolean error=false;
+        ReferenciaLibro libro=new ReferenciaLibro(titulo, descripcion, isbn, estado, unidades, decimales, leido); // libro nuevo
 
-        if (compruebaLibro(titulo, isbn)){ // Comprueba que los caracteres son los que corresponden para el libro y el isbn
-            ReferenciaLibro libro=new ReferenciaLibro(titulo, descripcion, isbn, estado, unidades, decimales, leido); // libro nuevo
+
+        if (libro.compruebaLibro(titulo, isbn)==0){ // Comprueba que los caracteres son los que corresponden para el titulo y el isbn
             int indice = miVista.elementoListaSeleccionado();
+ 
             if (indice!=-1){ // Si hay un libro seleccionado
+                
+                if (indice>=miModelo.getListaLibros().size()){
+                    miVista.mostrarMensajeError("El indice del libro seleccionado es incorrecto");
+                    error=true;
+                }
+                
                 if (!miModelo.getLibro(indice).equals(libro)){ // Si los isbn son iguales entonces puedo cambiar el libro
                     miVista.mostrarMensajeError("No puedes modificar el ISBN de un libro existente");
                     error=true;
                 }
                 else {
-                    miModelo.reemplazarLibro(libro, indice); // Actualizo la informacion del libro seleccionado
-                    miVista.mostrarMensajeExito("El libro se ha actualizado correctamente");
+                    if (miModelo.reemplazarLibro(libro, indice)){ // Actualizo la informacion del libro seleccionado
+                        miVista.mostrarMensajeExito("El libro se ha actualizado correctamente");
+                    }
+                    else {
+                        miVista.mostrarMensajeError("Ya existe un libro con el mismo ISBN en la lista.");
+                    }
                 }
             }
             else { // Si no hay ningun libro seleccionado
-                miModelo.addLibro(libro); // Añade el libro a la lista
-                miVista.mostrarMensajeExito("El libro se ha añadido a la lista satisfactoriamente");
+                if (miModelo.addLibro(libro)){ // Añade el libro a la lista
+                    miVista.mostrarMensajeExito("El libro se ha añadido a la lista satisfactoriamente");
+                } 
+                else {
+                    miVista.mostrarMensajeError("Ya existe un libro con el mismo ISBN en la lista.");
+                }
             }
             
             if (!error){ // Si no ha habido errores entonces actualiza la lista de libros
@@ -71,37 +87,18 @@ public class ControladorEdicion {
                 
             }  
         }
-    }
-    
-    // Comprueba que la información para un libro es correcta
-    private boolean compruebaLibro(String titulo, String isbn){
-        boolean guardarLibro = true;
-        String error = "";
-
-        if (titulo.length() < 1 || titulo.length() > 20){
-            error += "El titulo del libro debe tener entre 1 y 20 caracteres. ";
+        if (libro.compruebaLibro(titulo, isbn)==1){
+            mensajeError += "El titulo del libro debe tener entre 1 y 20 caracteres. ";
+            error=true;
         }
-        if (isbn.length() < 1 || isbn.length() > 13){
-            error += "El isbn del libro debe tener entre 1 y 13 caracteres. ";
+        if (libro.compruebaLibro(titulo, isbn)==2){
+            mensajeError += "El isbn del libro debe tener entre 1 y 13 caracteres. ";
+            error=true;
         }
-        if (libroYaExiste(isbn)){ // Si el libro ya existe en la lista de libros
-            error += "Ya existe un libro con el mismo ISBN en la lista.";
+        
+        if (error){
+            miVista.mostrarMensajeError(mensajeError);
         }
-        if (!error.equals("")){
-            guardarLibro = false;
-            miVista.mostrarMensajeError(error);
-        }
-        return guardarLibro;
-    }
-    
-    // Comprueba si el libro ya existe en la lista
-    private boolean libroYaExiste(String isbn){
-        for (int i=0; i<miModelo.getListaLibros().size(); i++){
-            if (isbn.equals(miModelo.getLibro(i).getISBN()) && i!=miVista.elementoListaSeleccionado()){
-                return true;
-            }
-        }
-        return false;
     }
     
     /**
@@ -148,8 +145,7 @@ public class ControladorEdicion {
     public void procesarRedirrecionInicial(){
         Main.getGestorVistas().mostrarVistaInicial();
     }
-    
-        
+         
     public void procesarRedirrecionBusqueda(){
         Main.getGestorVistas().mostrarVistaBusqueda();
     }

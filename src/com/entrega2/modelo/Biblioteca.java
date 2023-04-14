@@ -24,9 +24,37 @@ public class Biblioteca {
     /**
      * Añade un libro a la lista
      * @param libro Libro que se desea añadir
+     * @returns -1 si el libro ya existe en la lista
      */
-    public void addLibro(ReferenciaLibro libro){
+    public boolean addLibro(ReferenciaLibro libro){
+       if (libroYaExiste(libro)){
+           return false;
+       }
        listaLibros.add(libro);
+       return true;
+    }
+    
+    // Comprueba si el libro ya existe en la lista
+    private boolean libroYaExiste(ReferenciaLibro libro){
+        for (int i=0; i<getListaLibros().size(); i++){
+            if (libro.getISBN().equals(getListaLibros().get(i).getISBN())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // Comprueba si el libro ya existe en la lista
+    private boolean libroYaExiste(ReferenciaLibro libro, int indice){
+        if (getListaLibros().size()==0){
+            return false;
+        }
+        for (int i=0; i<getListaLibros().size(); i++){
+            if (libro.getISBN().equals(getListaLibros().get(i).getISBN()) && i!=indice){
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -51,8 +79,12 @@ public class Biblioteca {
      * @param libro Libro nuevo que se quiere introducir
      * @param indice Indice en el que se quiere introducir el nuevo libro
      */
-    public void reemplazarLibro(ReferenciaLibro libro, int indice){
+    public boolean reemplazarLibro(ReferenciaLibro libro, int indice){
+        if (libroYaExiste(libro, indice)){
+            return false;
+        }
         listaLibros.set(indice, libro);
+        return true;
     }
     
     /**
@@ -83,4 +115,6 @@ public class Biblioteca {
         }
         return contadorLibrosLeidos;
     }
+    
+
 }

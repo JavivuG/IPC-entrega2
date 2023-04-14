@@ -5,6 +5,7 @@
 
 package com.entrega2.vista;
 
+import com.entrega2.modelo.ReferenciaLibro;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -22,7 +23,7 @@ public class GestorVistas {
             vistaActual.dispose();
         }
         vistaActual = new VistaInicial();
-        vistaActual.setMinimumSize(new Dimension(320,240)); // Cambio tamaño minimo de la vista
+        vistaActual.setMinimumSize(new Dimension(341,221)); // Cambio tamaño minimo de la vista
         vistaActual.setVisible(true);
     }
     
@@ -36,13 +37,23 @@ public class GestorVistas {
         vistaActual.setVisible(true);
     }
     
+    public void mostrarVistaEdicion(ReferenciaLibro libro, int indice){ // Con los datos para editar
+        if (vistaActual != null) {
+            vistaActual.setVisible(false);
+            vistaActual.dispose();
+        }
+        vistaActual = new VistaEdicion(libro,  indice);
+        vistaActual.setMinimumSize(new Dimension(600,350)); // Cambio tamaño minimo de la vista
+        vistaActual.setVisible(true);
+    }
+    
     public void mostrarVistaBusqueda(){
         if (vistaActual != null) {
             vistaActual.setVisible(false);
             vistaActual.dispose();
         }
         vistaActual = new VistaBusqueda();
-        vistaActual.setMinimumSize(new Dimension(620,350)); // Cambio tamaño minimo de la vista
+        vistaActual.setMinimumSize(new Dimension(689,259)); // Cambio tamaño minimo de la vista
         vistaActual.setVisible(true);
     }
 

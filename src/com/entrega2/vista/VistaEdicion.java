@@ -30,6 +30,22 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         librosList.setSelectionMode(1);
     }
+    
+    /**
+     * Creates new form NewJFrame
+     */
+    public VistaEdicion(ReferenciaLibro libro, int indice) {
+        initComponents();
+        miControlador=new ControladorEdicion(this);
+        // Hago que no pueda poner numeros negativos en ninguno de los spinner
+        ((SpinnerNumberModel) unidadesSpinner.getModel()).setMinimum(0);
+        ((SpinnerNumberModel) decimalesSpinner.getModel()).setMinimum(0);
+        ((SpinnerNumberModel) decimalesSpinner.getModel()).setMaximum(99);
+
+        librosList.setSelectionMode(1);
+        librosList.setSelectedIndex(indice);
+        miControlador.procesarEventoEditar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,14 +136,14 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(10, 25));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
         jPanel9.add(errorLabel);
 
         jPanel1.add(jPanel9, java.awt.BorderLayout.CENTER);
 
-        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
         exitoLabel.setForeground(new java.awt.Color(0, 153, 0));
         jPanel7.add(exitoLabel);
@@ -137,10 +153,11 @@ public class VistaEdicion extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         jPanel2.setMinimumSize(new java.awt.Dimension(500, 130));
-        jPanel2.setPreferredSize(new java.awt.Dimension(250, 130));
+        jPanel2.setPreferredSize(new java.awt.Dimension(280, 130));
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane1.setMinimumSize(new java.awt.Dimension(258, 130));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(280, 130));
 
         librosList.setPreferredSize(null);
         librosList.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -4,6 +4,8 @@
  */
 package com.entrega2.vista;
 
+import com.entrega2.modelo.ReferenciaLibro;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -44,14 +46,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         buscarTextField = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
-        filtrarComboBox = new javax.swing.JComboBox<>();
         buscarButton = new javax.swing.JButton();
+        filtrarComboBox = new javax.swing.JComboBox<>();
+        ordenarComboBox = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        librosList = new javax.swing.JList<>();
         jPanel5 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -102,21 +105,27 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
 
         buscarTextField.setText("Buscar");
         buscarTextField.setToolTipText("");
         buscarTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        buscarTextField.setPreferredSize(new java.awt.Dimension(200, 24));
+        buscarTextField.setPreferredSize(new java.awt.Dimension(320, 24));
         jPanel9.add(buscarTextField);
 
         jPanel1.add(jPanel9);
 
-        filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
-        jPanel7.add(filtrarComboBox);
+        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         buscarButton.setText("Buscar");
         jPanel7.add(buscarButton);
+
+        filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
+        jPanel7.add(filtrarComboBox);
+
+        ordenarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar:", "Alfabeticamente (menor a mayor)", "Alfabeticamente (mayor a menor)", "Precio (menor a mayor)", "Precio (mayor a menor)" }));
+        ordenarComboBox.setPreferredSize(new java.awt.Dimension(128, 24));
+        jPanel7.add(ordenarComboBox);
 
         jPanel1.add(jPanel7);
 
@@ -130,14 +139,9 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
         jPanel14.add(jPanel16, java.awt.BorderLayout.LINE_END);
 
-        jPanel19.setLayout(new java.awt.GridLayout());
+        jPanel19.setLayout(new java.awt.GridLayout(1, 0));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(librosList);
 
         jPanel19.add(jScrollPane2);
 
@@ -241,9 +245,13 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_exportarButtonActionPerformed
 
     private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
-        // TODO add your handling code here:
+        miControlador.procesarEventoEditar();
     }//GEN-LAST:event_editarButtonActionPerformed
 
+    public int getElementoListaSeleccionado(){
+        return librosList.getSelectedIndex();
+    }
+    
     public void mostrarMensajeError(String mensaje){
         exitoLabel1.setText("");
         errorLabel1.setText(mensaje);
@@ -252,6 +260,14 @@ public class VistaBusqueda extends javax.swing.JFrame {
     public void mostrarMensajeExito(String mensaje){
         errorLabel1.setText("");
         exitoLabel1.setText(mensaje);
+    }
+    
+    public void actualizaListaLibros(ArrayList<ReferenciaLibro> listaLibros){
+        String[] datos=new String[listaLibros.size()];
+        for (int i=0; i<listaLibros.size(); i++){
+            datos[i]=listaLibros.get(i).toString();
+        }
+        librosList.setListData(datos); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -267,7 +283,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -288,6 +303,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> librosList;
+    private javax.swing.JComboBox<String> ordenarComboBox;
     private javax.swing.JFileChooser seleccionFichero;
     // End of variables declaration//GEN-END:variables
 }

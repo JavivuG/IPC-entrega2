@@ -35,8 +35,17 @@ public class ControladorInicial {
     
     public void setContadores(){
         miVista.setCantidadLibros(miModelo.getListaLibros().size()+"");
+        
+        double precioMedio=miModelo.getPrecioMedio();
+        if (precioMedio!=0){
+            String precio = precioMedio+"";
+        
+            miVista.setPrecioMedio(precio.substring(0,precio.indexOf(".")+3));
+        }
+        else {
+            miVista.setPrecioMedio(precioMedio+"");
+        }
 
-        miVista.setPrecioMedio(miModelo.getPrecioMedio()+"");
 
         int cantidadLibrosLeidos=miModelo.getCantidadLibrosLeidos();
         miVista.setLibrosLeidos(cantidadLibrosLeidos+"/"+(miModelo.getListaLibros().size()-cantidadLibrosLeidos));

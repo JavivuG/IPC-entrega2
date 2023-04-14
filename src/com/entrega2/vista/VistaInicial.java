@@ -30,16 +30,16 @@ public class VistaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         totalLibrosLabel = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         leidosLabel = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         precioMedioLabel = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -49,43 +49,44 @@ public class VistaInicial extends javax.swing.JFrame {
         busquedaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(341, 230));
 
-        jPanel3.setLayout(new java.awt.GridLayout(4, 0));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jPanel7.setMinimumSize(new java.awt.Dimension(20, 28));
-        jPanel7.setPreferredSize(new java.awt.Dimension(643, 20));
-        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
-
-        jLabel2.setText("Nº total de libros:");
-        jPanel7.add(jLabel2);
-        jPanel7.add(totalLibrosLabel);
-
-        jPanel3.add(jPanel7);
+        jPanel10.setLayout(new java.awt.GridLayout(3, 0));
 
         jPanel8.setPreferredSize(new java.awt.Dimension(643, 20));
-        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 110, 5));
+
+        jLabel2.setText("Nº total de libros:");
+        jPanel8.add(jLabel2);
+        jPanel8.add(totalLibrosLabel);
+
+        jPanel10.add(jPanel8);
+
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
 
         jLabel3.setText("Nº de libros leídos/no leídos:");
-        jPanel8.add(jLabel3);
-        jPanel8.add(leidosLabel);
+        jPanel12.add(jLabel3);
+        jPanel12.add(leidosLabel);
 
-        jPanel3.add(jPanel8);
+        jPanel10.add(jPanel12);
 
-        jPanel9.setPreferredSize(new java.awt.Dimension(643, 20));
-        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 47, 5));
 
         jLabel4.setText("Precio medio de los libros:");
-        jPanel9.add(jLabel4);
-        jPanel9.add(precioMedioLabel);
+        jPanel13.add(jLabel4);
+        jPanel13.add(precioMedioLabel);
 
-        jPanel3.add(jPanel9);
-        jPanel3.add(jPanel6);
+        jPanel10.add(jPanel13);
+
+        jPanel3.add(jPanel10, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.SOUTH);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 10));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 10));
 
-        jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 22)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
         jLabel1.setText("Bienvenido");
         jPanel2.add(jLabel1);
 
@@ -93,7 +94,7 @@ public class VistaInicial extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
         edicionButton.setText("Edición manual de Biblioteca");
         edicionButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,9 +106,12 @@ public class VistaInicial extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4);
 
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
         busquedaButton.setText("Búsqueda de libros");
+        busquedaButton.setMaximumSize(new java.awt.Dimension(221, 24));
+        busquedaButton.setMinimumSize(new java.awt.Dimension(221, 24));
+        busquedaButton.setPreferredSize(new java.awt.Dimension(221, 24));
         busquedaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 busquedaButtonActionPerformed(evt);
@@ -162,14 +166,14 @@ public class VistaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel leidosLabel;
     private javax.swing.JLabel precioMedioLabel;
     private javax.swing.JLabel totalLibrosLabel;
