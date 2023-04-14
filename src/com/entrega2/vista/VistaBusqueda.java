@@ -4,6 +4,9 @@
  */
 package com.entrega2.vista;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author javivu
@@ -53,7 +56,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        mensajeLabel = new javax.swing.JLabel();
 
         seleccionFichero.setDialogTitle("");
 
@@ -157,8 +160,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
 
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel14.add(jLabel2);
+        mensajeLabel.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel14.add(mensajeLabel);
 
         jPanel5.add(jPanel14, java.awt.BorderLayout.SOUTH);
 
@@ -180,14 +183,22 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cargarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarButtonActionPerformed
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de texto", "txt");
+        seleccionFichero.setFileFilter(filter);
+        int result = seleccionFichero.showOpenDialog(this);
         
-        seleccionFichero.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION){
+            miControlador.procesarEventoCargar(seleccionFichero.getSelectedFile());
+        }
     }//GEN-LAST:event_cargarButtonActionPerformed
 
     private void exportarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarButtonActionPerformed
         seleccionFichero.showOpenDialog(this);
     }//GEN-LAST:event_exportarButtonActionPerformed
 
+    public void mostrarMensaje(String mensaje){
+        mensajeLabel.setText(mensaje);
+    }
     /**
      * @param args the command line arguments
      */
@@ -233,7 +244,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -250,6 +260,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel mensajeLabel;
     private javax.swing.JFileChooser seleccionFichero;
     // End of variables declaration//GEN-END:variables
 }

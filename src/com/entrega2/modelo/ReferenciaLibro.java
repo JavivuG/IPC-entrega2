@@ -13,6 +13,7 @@ public class ReferenciaLibro {
     private String titulo;
     private String isbn;
     private String descripcion;
+    private double precio;
     private int unidades;
     private int decimales;
     private String estado;
@@ -35,6 +36,15 @@ public class ReferenciaLibro {
         setLeido(leido);
         setUnidades(unidades);
         setDecimales(decimales);
+        setEstado(estado);
+    }
+    
+    public ReferenciaLibro(String titulo, String descripcion, String isbn, String estado, double precio, boolean leido){
+        this.isbn = isbn;
+        setTitulo(titulo);
+        setDescripcion(descripcion);
+        setLeido(leido);
+        setPrecio(precio);
         setEstado(estado);
     }
     
@@ -138,6 +148,11 @@ public class ReferenciaLibro {
     public void setDecimales(int decimales){
         this.decimales=decimales;
     }
+    
+    public void setPrecio(double precio){
+        this.precio=precio;
+    }
+    
     
     /**
      * Proporciona un nuevo estado para el libro

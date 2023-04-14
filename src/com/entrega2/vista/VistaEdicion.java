@@ -214,7 +214,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel22.setLayout(new java.awt.GridLayout(4, 2));
 
-        jPanel29.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel29.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jLabel9.setText("ISBN");
         jPanel29.add(jLabel9);
@@ -226,7 +226,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel22.add(jPanel30);
 
-        jPanel31.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel31.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jLabel10.setText("Estado");
         jPanel31.add(jLabel10);
@@ -240,7 +240,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel22.add(jPanel32);
 
-        jPanel33.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel33.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jLabel11.setText("Precio");
         jPanel33.add(jLabel11);
@@ -283,7 +283,7 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel23.setMinimumSize(new java.awt.Dimension(128, 24));
         jPanel23.setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel24.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel24.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jLabel7.setText("Título");
         jLabel7.setMinimumSize(new java.awt.Dimension(100, 50));
@@ -303,7 +303,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel26.setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel27.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jLabel8.setText("Descripción");
         jPanel27.add(jLabel8);
