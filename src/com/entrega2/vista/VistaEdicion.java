@@ -96,7 +96,7 @@ public class VistaEdicion extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(308, 160));
         setSize(new java.awt.Dimension(900, 450));
 
-        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +143,11 @@ public class VistaEdicion extends javax.swing.JFrame {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(258, 130));
 
         librosList.setPreferredSize(null);
+        librosList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librosListMouseClicked(evt);
+            }
+        });
         librosList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 librosListKeyPressed(evt);
@@ -315,6 +320,11 @@ public class VistaEdicion extends javax.swing.JFrame {
         descripcionTextArea.setColumns(20);
         descripcionTextArea.setLineWrap(true);
         descripcionTextArea.setRows(5);
+        descripcionTextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                descripcionTextAreaKeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(descripcionTextArea);
 
         jPanel28.add(jScrollPane3);
@@ -412,6 +422,19 @@ public class VistaEdicion extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.miControlador.procesarRedirrecionBusqueda();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void descripcionTextAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionTextAreaKeyPressed
+        if(evt.getKeyChar() == '\t'){
+            referenciaTextField.requestFocus();
+            evt.consume();
+        }
+    }//GEN-LAST:event_descripcionTextAreaKeyPressed
+
+    private void librosListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librosListMouseClicked
+        if (evt.getClickCount() == 2){
+            this.miControlador.procesarEventoEditar();
+        }
+    }//GEN-LAST:event_librosListMouseClicked
 
     /**
      * Selecciona o deja de seleccionar elementos de una lista

@@ -32,6 +32,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private void initComponents() {
 
         seleccionFichero = new javax.swing.JFileChooser();
+        exportarLibros = new javax.swing.JFileChooser();
         jPanel11 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -45,16 +46,20 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         filtrarComboBox = new javax.swing.JComboBox<>();
         buscarButton = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         cargarButton = new javax.swing.JButton();
         exportarButton = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        editarButton = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         errorLabel1 = new javax.swing.JLabel();
@@ -65,7 +70,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +105,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
         buscarTextField.setText("Buscar");
+        buscarTextField.setToolTipText("");
+        buscarTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         buscarTextField.setPreferredSize(new java.awt.Dimension(200, 24));
         jPanel9.add(buscarTextField);
 
@@ -115,9 +122,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel4.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        jPanel14.setLayout(new java.awt.BorderLayout());
 
-        jPanel13.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+        jPanel14.add(jPanel15, java.awt.BorderLayout.LINE_START);
+
+        jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+        jPanel14.add(jPanel16, java.awt.BorderLayout.LINE_END);
+
+        jPanel19.setLayout(new java.awt.GridLayout());
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -126,8 +139,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jList1);
 
-        jPanel13.add(jScrollPane2);
+        jPanel19.add(jScrollPane2);
 
+        jPanel14.add(jPanel19, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(jPanel14, java.awt.BorderLayout.CENTER);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel13.setLayout(new java.awt.GridLayout(1, 0));
         jPanel5.add(jPanel13, java.awt.BorderLayout.NORTH);
 
         jPanel6.setLayout(new java.awt.GridLayout(1, 2));
@@ -154,8 +174,13 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
 
-        jButton6.setText("Editar libro");
-        jPanel10.add(jButton6);
+        editarButton.setText("Editar libro");
+        editarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarButtonActionPerformed(evt);
+            }
+        });
+        jPanel10.add(editarButton);
 
         jPanel6.add(jPanel10);
 
@@ -181,7 +206,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel5.add(jPanel8, java.awt.BorderLayout.PAGE_END);
 
-        jPanel4.add(jPanel5, java.awt.BorderLayout.CENTER);
+        jPanel4.add(jPanel5, java.awt.BorderLayout.SOUTH);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -209,8 +234,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarButtonActionPerformed
 
     private void exportarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarButtonActionPerformed
-        seleccionFichero.showOpenDialog(this);
+        int result = exportarLibros.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION){
+            miControlador.procesarEventoExportar(exportarLibros.getSelectedFile());
+        }
     }//GEN-LAST:event_exportarButtonActionPerformed
+
+    private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarButtonActionPerformed
 
     public void mostrarMensajeError(String mensaje){
         exitoLabel1.setText("");
@@ -226,13 +258,14 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JButton buscarButton;
     private javax.swing.JTextField buscarTextField;
     private javax.swing.JButton cargarButton;
+    private javax.swing.JButton editarButton;
     private javax.swing.JLabel errorLabel1;
     private javax.swing.JLabel exitoLabel1;
     private javax.swing.JButton exportarButton;
+    private javax.swing.JFileChooser exportarLibros;
     private javax.swing.JComboBox<String> filtrarComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
@@ -240,8 +273,12 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

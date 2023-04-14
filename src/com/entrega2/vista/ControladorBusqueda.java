@@ -8,10 +8,13 @@ import com.entrega2.main.Main;
 import com.entrega2.modelo.Biblioteca;
 import com.entrega2.modelo.ReferenciaLibro;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -87,5 +90,23 @@ public class ControladorBusqueda {
             miVista.mostrarMensajeError("No se ha encontrado el fichero");
         }
 
+    }
+    
+    public void procesarEventoExportar(File fichero){
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(fichero))) {
+
+            ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
+            for (int i=0; i<listaLibros.size(); i++){
+                ReferenciaLibro libro=listaLibros.get(i);
+                escritor.write(libro.getTitulo()+";"+libro.getDescripcion()+";"
+                        +libro.getISBN()+";"+libro.getEstado()+";"+libro.getPrecio()+";"+libro.isLeido()+"\n");
+            }
+            
+            miVista.mostrarMensajeExito("Se han exportado "+ listaLibros.size()+ " libros");
+
+            escritor.close();
+        } catch (IOException e){
+            miVista.mostrarMensajeError("No se puedo crear el fichero de exportación");
+        }
     }
 }
