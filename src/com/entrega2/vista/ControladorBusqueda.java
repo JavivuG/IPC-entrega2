@@ -28,7 +28,7 @@ public class ControladorBusqueda {
      */
     public ControladorBusqueda(VistaBusqueda vista){
         this.miVista=vista;
-        this.miModelo=new Biblioteca();
+        this.miModelo=Main.getBiblioteca();
     }
     
     public void procesarRedirrecionInicial(){
@@ -40,23 +40,23 @@ public class ControladorBusqueda {
     }
     
     public void procesarEventoCargar(File ficheroImportar){
-        try {
+        try (BufferedReader reader = new BufferedReader(new FileReader(ficheroImportar))) {
             int contadorLibros=0, contadorLineas=0;
             String titulo, descripcion, isbn, estado;
             double precio=0;
-            boolean error, leido;
+            boolean error, leido=false;
             String linea;
-            BufferedReader reader = new BufferedReader(new FileReader(ficheroImportar));
             
             while ((linea=reader.readLine())!=null){
                 error=false;
                 String[] datosLibro= linea.split(";");
+
                 titulo=datosLibro[0];
                 descripcion=datosLibro[1];
                 isbn=datosLibro[2];
                 estado=datosLibro[3];
                 try {
-                    precio=Double.parseDouble(datosLibro[4]);                    
+                    precio=Double.parseDouble(datosLibro[4]);
                 }
                 catch (NumberFormatException e){
                     error=true;
@@ -70,23 +70,21 @@ public class ControladorBusqueda {
                 }
 
                 if (!error){
-                    ReferenciaLibro libro=new ReferenciaLibro(titulo, descripcion, isbn, titulo, precio, true);
-                    System.out.println(libro);
-                    miModelo.addLibro(libro);
+                    miModelo.addLibro(new ReferenciaLibro(titulo, descripcion, isbn, estado, precio, leido));
                     contadorLibros++;   
                 }
                 contadorLineas++;
             }
             if (contadorLibros>0){
-                miVista.mostrarMensaje("Se han añadido "+ contadorLibros+" libros");
+                miVista.mostrarMensajeExito("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero");
             }
             else {
-                miVista.mostrarMensaje("No se han podido añadir nuevos libros");
+                miVista.mostrarMensajeError("No se han podido añadir nuevos libros");
             }
             reader.close();
         }
         catch (IOException e){
-            miVista.mostrarMensaje("No se ha encontrado el fichero");
+            miVista.mostrarMensajeError("No se ha encontrado el fichero");
         }
 
     }

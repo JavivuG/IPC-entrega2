@@ -7,6 +7,7 @@ package com.entrega2.vista;
 import com.entrega2.main.Main;
 import com.entrega2.modelo.Biblioteca;
 import com.entrega2.modelo.ReferenciaLibro;
+import java.util.ArrayList;
 
 /**
  * Clase que representa el controlador de la aplicación, consulta/actualiza los elementos de la vista e informacion del modelo
@@ -23,7 +24,11 @@ public class ControladorEdicion {
      */
     public ControladorEdicion(VistaEdicion vista){
         this.miVista=vista;
-        this.miModelo=new Biblioteca();
+        this.miModelo=Main.getBiblioteca();
+        ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
+        if (listaLibros.size()>0){
+            miVista.actualizaListaLibros(listaLibros);
+        }
     }
     
     /**
@@ -110,7 +115,7 @@ public class ControladorEdicion {
             miVista.mostrarMensajeExito("Editando libro...");
         }
         else {
-            if (miModelo.getListaLibros().size()==0){ // Si no hay libros
+            if (miModelo.getListaLibros().isEmpty()){ // Si no hay libros
                 miVista.mostrarMensajeError("No hay libros en la lista");
             }
             else {

@@ -55,8 +55,11 @@ public class VistaBusqueda extends javax.swing.JFrame {
         exportarButton = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
-        mensajeLabel = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        errorLabel1 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        exitoLabel1 = new javax.swing.JLabel();
 
         seleccionFichero.setDialogTitle("");
 
@@ -114,7 +117,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jPanel13.setLayout(new java.awt.GridLayout());
+        jPanel13.setLayout(new java.awt.GridLayout(1, 0));
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -149,7 +152,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel6.add(jPanel12);
 
-        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 30, 5));
+        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
 
         jButton6.setText("Editar libro");
         jPanel10.add(jButton6);
@@ -158,12 +161,25 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel5.add(jPanel6, java.awt.BorderLayout.CENTER);
 
-        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel8.setMinimumSize(new java.awt.Dimension(10, 25));
+        jPanel8.setPreferredSize(new java.awt.Dimension(10, 25));
+        jPanel8.setLayout(new java.awt.BorderLayout());
 
-        mensajeLabel.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel14.add(mensajeLabel);
+        jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jPanel5.add(jPanel14, java.awt.BorderLayout.SOUTH);
+        errorLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel17.add(errorLabel1);
+
+        jPanel8.add(jPanel17, java.awt.BorderLayout.CENTER);
+
+        jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        exitoLabel1.setForeground(new java.awt.Color(0, 153, 0));
+        jPanel18.add(exitoLabel1);
+
+        jPanel8.add(jPanel18, java.awt.BorderLayout.EAST);
+
+        jPanel5.add(jPanel8, java.awt.BorderLayout.PAGE_END);
 
         jPanel4.add(jPanel5, java.awt.BorderLayout.CENTER);
 
@@ -196,48 +212,22 @@ public class VistaBusqueda extends javax.swing.JFrame {
         seleccionFichero.showOpenDialog(this);
     }//GEN-LAST:event_exportarButtonActionPerformed
 
-    public void mostrarMensaje(String mensaje){
-        mensajeLabel.setText(mensaje);
+    public void mostrarMensajeError(String mensaje){
+        exitoLabel1.setText("");
+        errorLabel1.setText(mensaje);
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaBusqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaBusqueda().setVisible(true);
-            }
-        });
+    
+    public void mostrarMensajeExito(String mensaje){
+        errorLabel1.setText("");
+        exitoLabel1.setText(mensaje);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarButton;
     private javax.swing.JTextField buscarTextField;
     private javax.swing.JButton cargarButton;
+    private javax.swing.JLabel errorLabel1;
+    private javax.swing.JLabel exitoLabel1;
     private javax.swing.JButton exportarButton;
     private javax.swing.JComboBox<String> filtrarComboBox;
     private javax.swing.JButton jButton1;
@@ -250,7 +240,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -260,7 +251,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel mensajeLabel;
     private javax.swing.JFileChooser seleccionFichero;
     // End of variables declaration//GEN-END:variables
 }

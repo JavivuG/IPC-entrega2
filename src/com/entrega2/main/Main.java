@@ -4,6 +4,7 @@
  */
 package com.entrega2.main;
 
+import com.entrega2.modelo.Biblioteca;
 import com.entrega2.vista.GestorVistas;
 
 /**
@@ -12,6 +13,7 @@ import com.entrega2.vista.GestorVistas;
  */
 public class Main {
     private static GestorVistas gestor;
+    private static Biblioteca biblioteca;
 
     /**
      * @param args the command line arguments
@@ -19,6 +21,8 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         gestor = new GestorVistas();
+        biblioteca=new Biblioteca();
+        
         gestor.mostrarVistaInicial();
     }
 
@@ -28,6 +32,10 @@ public class Main {
      */
     public static GestorVistas getGestorVistas() {
         return gestor;
+    }
+    
+    public static Biblioteca getBiblioteca(){
+        return biblioteca;
     }
 
 

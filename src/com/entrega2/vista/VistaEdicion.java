@@ -338,7 +338,7 @@ public class VistaEdicion extends javax.swing.JFrame {
      * @param evt 
      */
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
-        this.miControlador.procesarEventoGuardar();
+        miControlador.procesarEventoGuardar();
     }//GEN-LAST:event_guardarButtonActionPerformed
 
     /**

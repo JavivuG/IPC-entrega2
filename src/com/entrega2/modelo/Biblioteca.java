@@ -62,4 +62,25 @@ public class Biblioteca {
     public void borraLibro(int indice){
         listaLibros.remove(indice);
     }
+    
+    public double getPrecioMedio(){
+        double sumaPrecio=0;
+        if (listaLibros.size()>0){
+            for (int i=0; i<listaLibros.size(); i++){
+                sumaPrecio+=listaLibros.get(i).getPrecio();
+            }
+            return sumaPrecio/listaLibros.size();
+        }
+        return 0;
+    }
+    
+    public int getCantidadLibrosLeidos(){
+        int contadorLibrosLeidos=0;
+        for (int i=0; i<listaLibros.size(); i++){
+            if (listaLibros.get(i).isLeido()){
+                contadorLibrosLeidos++;
+            }
+        }
+        return contadorLibrosLeidos;
+    }
 }

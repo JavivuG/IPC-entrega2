@@ -13,6 +13,7 @@ import com.entrega2.modelo.Biblioteca;
  */
 public class ControladorInicial {
     private VistaInicial miVista; // VistaEdicion de la aplicación
+    private Biblioteca miModelo;
     
     /**
      * Constructor del controlador. Inicializa el modelo
@@ -20,6 +21,7 @@ public class ControladorInicial {
      */
     public ControladorInicial(VistaInicial vista){
         this.miVista=vista;
+        this.miModelo=Main.getBiblioteca();
         setContadores();
     }
     
@@ -32,16 +34,11 @@ public class ControladorInicial {
     }
     
     public void setContadores(){
-        if (miVista.getCantidadLibros().equals("")){
-            miVista.setCantidadLibros("0");
-        }
-        
-        if (miVista.getPrecioMedio().equals("")){
-            miVista.setPrecioMedio("0");
-        }
-        
-        if (miVista.getLibrosLeidos().equals("")){
-            miVista.setLibrosLeidos("0/0");
-        }
+        miVista.setCantidadLibros(miModelo.getListaLibros().size()+"");
+
+        miVista.setPrecioMedio(miModelo.getPrecioMedio()+"");
+
+        int cantidadLibrosLeidos=miModelo.getCantidadLibrosLeidos();
+        miVista.setLibrosLeidos(cantidadLibrosLeidos+"/"+(miModelo.getListaLibros().size()-cantidadLibrosLeidos));
     }
 }

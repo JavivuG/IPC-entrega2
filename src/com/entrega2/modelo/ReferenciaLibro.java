@@ -14,8 +14,6 @@ public class ReferenciaLibro {
     private String isbn;
     private String descripcion;
     private double precio;
-    private int unidades;
-    private int decimales;
     private String estado;
     private boolean leido;
     
@@ -34,8 +32,7 @@ public class ReferenciaLibro {
         setTitulo(titulo);
         setDescripcion(descripcion);
         setLeido(leido);
-        setUnidades(unidades);
-        setDecimales(decimales);
+        setPrecio(unidades, decimales);
         setEstado(estado);
     }
     
@@ -73,11 +70,20 @@ public class ReferenciaLibro {
     }
     
     /**
+     * Devuelve el precio del libro
+     * @return Precio del libro
+     */
+    public double getPrecio(){
+        return precio;
+    }
+    
+    /**
      * Devuelve las unidades del precio del libro
      * @return Unidades del precio del libro
      */
     public int getUnidadesLibro(){
-        return unidades;
+        String precio=String.valueOf(this.precio);
+        return Integer.parseInt(precio.substring(0,precio.indexOf(".")));
     }
     
     /**
@@ -85,20 +91,8 @@ public class ReferenciaLibro {
      * @return Decimales del precio del libro
      */
     public int getDecimalesLibro(){
-        return decimales;
-    }
-    
-    /**
-     * Devuelve el precio del libro
-     * @return Precio del libro
-     */
-    public double getPrecio(){
-        int n = (int)Math.log10(getDecimalesLibro())+1;
-        if (n==1){
-            n=2;
-        }
-        Double decimalesDouble = (double)getDecimalesLibro()/(Math.pow(10, n));
-        return getUnidadesLibro()+decimalesDouble;
+        String precio=String.valueOf(this.precio);
+        return Integer.parseInt(precio.substring(precio.indexOf(".")+1));
     }
     
     /**
@@ -133,24 +127,19 @@ public class ReferenciaLibro {
         this.descripcion = descripcion;
     }
     
-    /**
-     * Proporciona un nuevo valor para las unidades del precio del libro
-     * @param unidades Unidades del precio del libro
-     */
-    public void setUnidades(int unidades){
-        this.unidades=unidades;
-    }
-    
-    /**
-     * Proporciona un nuevo valor para los decimales del precio del libro
-     * @param decimales Decimales del precio del libro
-     */
-    public void setDecimales(int decimales){
-        this.decimales=decimales;
-    }
+
     
     public void setPrecio(double precio){
         this.precio=precio;
+    }
+    
+    public void setPrecio(int unidades, int decimales){
+        int n = (int)Math.log10(decimales)+1;
+        if (n==1){
+            n=2;
+        }
+        Double decimalesDouble = (double)unidades/(Math.pow(10, n));
+        this.precio=  unidades+decimalesDouble;
     }
     
     
@@ -169,6 +158,7 @@ public class ReferenciaLibro {
     public void setLeido(boolean leido){
         this.leido = leido;
     }
+    
     
     /**
      * Proporciona un String para representar el libro
