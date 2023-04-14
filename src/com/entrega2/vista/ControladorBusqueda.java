@@ -4,6 +4,8 @@
  */
 package com.entrega2.vista;
 
+import com.entrega2.main.Main;
+
 /**
  *
  * @author javivu
@@ -17,5 +19,13 @@ public class ControladorBusqueda {
      */
     public ControladorBusqueda(VistaBusqueda vista){
         this.miVista=vista;
+    }
+    
+    public void procesarRedirrecionInicial(){
+        Main.getGestorVistas().mostrarVistaInicial();
+    }
+    
+    public void procesarRedirrecionBusqueda(){
+        Main.getGestorVistas().mostrarVistaEdicion();
     }
 }

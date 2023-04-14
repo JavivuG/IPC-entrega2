@@ -5,7 +5,7 @@
 package com.entrega2.vista;
 
 import com.entrega2.main.Main;
-import com.entrega2.modelo.Modelo;
+import com.entrega2.modelo.Biblioteca;
 import com.entrega2.modelo.ReferenciaLibro;
 
 /**
@@ -14,7 +14,7 @@ import com.entrega2.modelo.ReferenciaLibro;
  * @author mgonzal
  */
 public class ControladorEdicion {
-    private Modelo miModelo; // Modelo de la aplicación
+    private Biblioteca miModelo; // Biblioteca de la aplicación
     private VistaEdicion miVista; // VistaEdicion de la aplicación
     
     /**
@@ -23,7 +23,7 @@ public class ControladorEdicion {
      */
     public ControladorEdicion(VistaEdicion vista){
         this.miVista=vista;
-        this.miModelo=new Modelo();
+        this.miModelo=new Biblioteca();
     }
     
     /**

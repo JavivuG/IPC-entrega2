@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * @author jagarci
  * @author mgonzal
  */
-public class Modelo {
+public class Biblioteca {
     private ArrayList<ReferenciaLibro> listaLibros;
     
     /**
      * Constructor del modelo de la aplicación
      */
-    public Modelo(){
+    public Biblioteca(){
         listaLibros=new ArrayList<>();
     }
     

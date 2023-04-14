@@ -5,7 +5,7 @@
 package com.entrega2.vista;
 
 import com.entrega2.main.Main;
-import com.entrega2.modelo.Modelo;
+import com.entrega2.modelo.Biblioteca;
 
 /**
  *

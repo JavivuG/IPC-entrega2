@@ -9,12 +9,14 @@ package com.entrega2.vista;
  * @author javivu
  */
 public class VistaBusqueda extends javax.swing.JFrame {
+    private ControladorBusqueda miControlador;
 
     /**
      * Creates new form VistaBusqueda
      */
     public VistaBusqueda() {
         initComponents();
+        miControlador=new ControladorBusqueda(this);
     }
 
     /**
@@ -26,21 +28,165 @@ public class VistaBusqueda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        seleccionFichero = new javax.swing.JFileChooser();
+        jPanel11 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        buscarTextField = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        filtrarComboBox = new javax.swing.JComboBox<>();
+        buscarButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        cargarButton = new javax.swing.JButton();
+        exportarButton = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+
+        seleccionFichero.setDialogTitle("");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jButton1);
+
+        jButton2.setText("Edición");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jButton2);
+
+        getContentPane().add(jPanel11, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
+        jLabel1.setText("Búsqueda de libros");
+        jPanel3.add(jLabel1);
+
+        jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 2));
+
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+
+        buscarTextField.setText("Buscar");
+        buscarTextField.setPreferredSize(new java.awt.Dimension(200, 24));
+        jPanel9.add(buscarTextField);
+
+        jPanel1.add(jPanel9);
+
+        filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
+        jPanel7.add(filtrarComboBox);
+
+        buscarButton.setText("Buscar");
+        jPanel7.add(buscarButton);
+
+        jPanel1.add(jPanel7);
+
+        jPanel4.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel13.setLayout(new java.awt.GridLayout());
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
+
+        jPanel13.add(jScrollPane2);
+
+        jPanel5.add(jPanel13, java.awt.BorderLayout.NORTH);
+
+        jPanel6.setLayout(new java.awt.GridLayout(1, 2));
+
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+
+        cargarButton.setText("Cargar libros");
+        cargarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarButtonActionPerformed(evt);
+            }
+        });
+        jPanel12.add(cargarButton);
+
+        exportarButton.setText("Exportar libros");
+        exportarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarButtonActionPerformed(evt);
+            }
+        });
+        jPanel12.add(exportarButton);
+
+        jPanel6.add(jPanel12);
+
+        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 30, 5));
+
+        jButton6.setText("Editar libro");
+        jPanel10.add(jButton6);
+
+        jPanel6.add(jPanel10);
+
+        jPanel5.add(jPanel6, java.awt.BorderLayout.CENTER);
+
+        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel14.add(jLabel2);
+
+        jPanel5.add(jPanel14, java.awt.BorderLayout.SOUTH);
+
+        jPanel4.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.miControlador.procesarRedirrecionInicial();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.miControlador.procesarRedirrecionBusqueda();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cargarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarButtonActionPerformed
+        
+        seleccionFichero.showOpenDialog(this);
+    }//GEN-LAST:event_cargarButtonActionPerformed
+
+    private void exportarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarButtonActionPerformed
+        seleccionFichero.showOpenDialog(this);
+    }//GEN-LAST:event_exportarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +224,32 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscarButton;
+    private javax.swing.JTextField buscarTextField;
+    private javax.swing.JButton cargarButton;
+    private javax.swing.JButton exportarButton;
+    private javax.swing.JComboBox<String> filtrarComboBox;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JFileChooser seleccionFichero;
     // End of variables declaration//GEN-END:variables
 }

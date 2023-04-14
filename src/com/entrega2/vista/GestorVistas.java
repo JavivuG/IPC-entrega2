@@ -42,7 +42,7 @@ public class GestorVistas {
             vistaActual.dispose();
         }
         vistaActual = new VistaBusqueda();
-        vistaActual.setMinimumSize(new Dimension(600,350)); // Cambio tamaño minimo de la vista
+        vistaActual.setMinimumSize(new Dimension(620,350)); // Cambio tamaño minimo de la vista
         vistaActual.setVisible(true);
     }
 
