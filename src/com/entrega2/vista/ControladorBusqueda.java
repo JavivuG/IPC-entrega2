@@ -10,7 +10,6 @@ import com.entrega2.modelo.ReferenciaLibro;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,8 +41,8 @@ public class ControladorBusqueda {
         Main.getGestorVistas().mostrarVistaInicial();
     }
     
-    public void procesarRedirrecionBusqueda(){
-        Main.getGestorVistas().mostrarVistaEdicion();
+    public void procesarRedirrecionEdicion(){
+        Main.getGestorVistas().mostrarVistaEdicion(null,null);
     }
     
     public void procesarEventoCargar(File ficheroImportar){
@@ -51,12 +50,17 @@ public class ControladorBusqueda {
             int contadorLibros=0, contadorLineas=0;
             String titulo, descripcion, isbn, estado;
             double precio=0;
-            boolean error, leido=false;
+            boolean error, leido=false, ficheroNoEsCorrecto=false;
             String linea;
             
             while ((linea=reader.readLine())!=null){
                 error=false;
                 String[] datosLibro= linea.split(";");
+                
+                if (datosLibro.length!=6){
+                    ficheroNoEsCorrecto=true;
+                    break;
+                }
 
                 titulo=datosLibro[0];
                 descripcion=datosLibro[1];
@@ -89,7 +93,12 @@ public class ControladorBusqueda {
                 miVista.mostrarMensajeExito("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero");
             }
             else {
-                miVista.mostrarMensajeError("No se han podido añadir nuevos libros");
+                if (ficheroNoEsCorrecto){
+                    miVista.mostrarMensajeError("El fichero no es correcto");
+                }
+                else {
+                    miVista.mostrarMensajeError("No se han podido añadir nuevos libros");
+                }
             }
             reader.close();
         }
@@ -123,7 +132,12 @@ public class ControladorBusqueda {
             Main.getGestorVistas().mostrarVistaEdicion(miModelo.getListaLibros().get(indice), indice);
         }
         else {
-            miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
+            if (miModelo.getListaLibros().isEmpty()){
+                miVista.mostrarMensajeError("No hay libros en la lista");
+            }
+            else {
+                miVista.mostrarMensajeError("Debe seleccionar un libro de la lista"); 
+            }
         }
     }
 }

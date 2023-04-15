@@ -133,7 +133,7 @@ public class ControladorEdicion {
             miVista.mostrarMensajeExito("El libro se ha borrado de la lista");
         }
         else { // Si no hay ningun elemento seleccionado
-            if (miModelo.getListaLibros().size()==0){
+            if (miModelo.getListaLibros().isEmpty()){
                 miVista.mostrarMensajeError("No hay libros en la lista");
             }
             else {

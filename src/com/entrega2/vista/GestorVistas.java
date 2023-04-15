@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 /**
  *
  * @author jagarci
+ * @author mgonzal
  */
 public class GestorVistas {
     private JFrame vistaActual;
@@ -27,22 +28,17 @@ public class GestorVistas {
         vistaActual.setVisible(true);
     }
     
-    public void mostrarVistaEdicion(){
+    public void mostrarVistaEdicion(ReferenciaLibro libro, Integer indice){ // Con los datos para editar
         if (vistaActual != null) {
             vistaActual.setVisible(false);
             vistaActual.dispose();
         }
-        vistaActual = new VistaEdicion();
-        vistaActual.setMinimumSize(new Dimension(600,350)); // Cambio tamaño minimo de la vista
-        vistaActual.setVisible(true);
-    }
-    
-    public void mostrarVistaEdicion(ReferenciaLibro libro, int indice){ // Con los datos para editar
-        if (vistaActual != null) {
-            vistaActual.setVisible(false);
-            vistaActual.dispose();
+        if (libro!=null && indice!=null){
+            vistaActual = new VistaEdicion(libro,  indice);
         }
-        vistaActual = new VistaEdicion(libro,  indice);
+        else {
+            vistaActual = new VistaEdicion();
+        }
         vistaActual.setMinimumSize(new Dimension(600,350)); // Cambio tamaño minimo de la vista
         vistaActual.setVisible(true);
     }

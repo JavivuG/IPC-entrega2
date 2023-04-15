@@ -7,6 +7,7 @@ package com.entrega2.vista;
 /**
  *
  * @author javivu
+ * @author mgonzal
  */
 public class VistaInicial extends javax.swing.JFrame {
     private ControladorInicial controlador;

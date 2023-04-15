@@ -56,6 +56,9 @@ public class VistaEdicion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        atajosButton = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -69,6 +72,8 @@ public class VistaEdicion extends javax.swing.JFrame {
         librosList = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
@@ -112,6 +117,20 @@ public class VistaEdicion extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(308, 160));
         setSize(new java.awt.Dimension(900, 450));
 
+        jPanel12.setLayout(new java.awt.BorderLayout());
+
+        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        atajosButton.setText("Atajos");
+        atajosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atajosButtonActionPerformed(evt);
+            }
+        });
+        jPanel13.add(atajosButton);
+
+        jPanel12.add(jPanel13, java.awt.BorderLayout.EAST);
+
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jButton1.setText("Volver");
@@ -130,7 +149,9 @@ public class VistaEdicion extends javax.swing.JFrame {
         });
         jPanel11.add(jButton2);
 
-        getContentPane().add(jPanel11, java.awt.BorderLayout.PAGE_START);
+        jPanel12.add(jPanel11, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel12, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setMinimumSize(new java.awt.Dimension(10, 25));
         jPanel1.setPreferredSize(new java.awt.Dimension(10, 25));
@@ -180,7 +201,10 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 240));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jPanel4.setLayout(new java.awt.GridLayout(1, 3));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+        jPanel4.add(jPanel15, java.awt.BorderLayout.WEST);
+
+        jPanel14.setLayout(new java.awt.GridLayout(1, 3));
 
         jPanel16.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -192,7 +216,7 @@ public class VistaEdicion extends javax.swing.JFrame {
         });
         jPanel16.add(guardarButton);
 
-        jPanel4.add(jPanel16);
+        jPanel14.add(jPanel16);
 
         jPanel17.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -209,7 +233,7 @@ public class VistaEdicion extends javax.swing.JFrame {
         });
         jPanel17.add(editarButton);
 
-        jPanel4.add(jPanel17);
+        jPanel14.add(jPanel17);
 
         jPanel18.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -226,7 +250,9 @@ public class VistaEdicion extends javax.swing.JFrame {
         });
         jPanel18.add(borrarButton);
 
-        jPanel4.add(jPanel18);
+        jPanel14.add(jPanel18);
+
+        jPanel4.add(jPanel14, java.awt.BorderLayout.CENTER);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
@@ -453,6 +479,10 @@ public class VistaEdicion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_librosListMouseClicked
 
+    private void atajosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atajosButtonActionPerformed
+        // TODO
+    }//GEN-LAST:event_atajosButtonActionPerformed
+
     /**
      * Selecciona o deja de seleccionar elementos de una lista
      * Selecciona un elemento si se pulsa un tecla entre 1 y 9 
@@ -609,6 +639,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atajosButton;
     private javax.swing.JButton borrarButton;
     private javax.swing.JSpinner decimalesSpinner;
     private javax.swing.JTextArea descripcionTextArea;
@@ -627,6 +658,10 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;

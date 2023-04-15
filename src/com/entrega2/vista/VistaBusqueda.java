@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author javivu
+ * @author mgonzal
  */
 public class VistaBusqueda extends javax.swing.JFrame {
     private ControladorBusqueda miControlador;
@@ -73,7 +74,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +106,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         buscarTextField.setText("Buscar");
         buscarTextField.setToolTipText("");
@@ -132,15 +133,16 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel4.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel14.setLayout(new java.awt.BorderLayout());
-
-        jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
         jPanel14.add(jPanel15, java.awt.BorderLayout.LINE_START);
-
-        jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
         jPanel14.add(jPanel16, java.awt.BorderLayout.LINE_END);
 
         jPanel19.setLayout(new java.awt.GridLayout(1, 0));
 
+        librosList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librosListMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(librosList);
 
         jPanel19.add(jScrollPane2);
@@ -156,7 +158,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel6.setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 5));
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         cargarButton.setText("Cargar libros");
         cargarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +178,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel6.add(jPanel12);
 
-        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
+        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
         editarButton.setText("Editar libro");
         editarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -194,14 +196,14 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel8.setPreferredSize(new java.awt.Dimension(10, 25));
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         errorLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jPanel17.add(errorLabel1);
 
         jPanel8.add(jPanel17, java.awt.BorderLayout.CENTER);
 
-        jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
         exitoLabel1.setForeground(new java.awt.Color(0, 153, 0));
         jPanel18.add(exitoLabel1);
@@ -224,7 +226,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.miControlador.procesarRedirrecionBusqueda();
+        this.miControlador.procesarRedirrecionEdicion();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cargarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarButtonActionPerformed
@@ -247,6 +249,12 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
         miControlador.procesarEventoEditar();
     }//GEN-LAST:event_editarButtonActionPerformed
+
+    private void librosListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librosListMouseClicked
+        if (evt.getClickCount() == 2){
+            miControlador.procesarEventoEditar();
+        }
+    }//GEN-LAST:event_librosListMouseClicked
 
     public int getElementoListaSeleccionado(){
         return librosList.getSelectedIndex();

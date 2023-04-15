@@ -10,6 +10,7 @@ import com.entrega2.modelo.Biblioteca;
 /**
  *
  * @author javivu
+ * @author mgonzal
  */
 public class ControladorInicial {
     private VistaInicial miVista; // VistaEdicion de la aplicación
@@ -26,7 +27,7 @@ public class ControladorInicial {
     }
     
     public void procesarRedireccionEdicion(){
-        Main.getGestorVistas().mostrarVistaEdicion();
+        Main.getGestorVistas().mostrarVistaEdicion(null,null);
     }
     
     public void procesarRedireccionBusqueda(){
