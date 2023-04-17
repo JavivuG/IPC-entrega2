@@ -6,6 +6,8 @@ package com.entrega2.vista;
 
 import com.entrega2.main.Main;
 import com.entrega2.modelo.Biblioteca;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 /**
  *
@@ -39,9 +41,10 @@ public class ControladorInicial {
         
         double precioMedio=miModelo.getPrecioMedio();
         if (precioMedio!=0){
-            String precio = precioMedio+"";
-        
-            miVista.setPrecioMedio(precio.substring(0,precio.indexOf(".")+3));
+            DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+            simbolos.setDecimalSeparator('.');
+            DecimalFormat formato = new DecimalFormat("####.##", simbolos);
+            miVista.setPrecioMedio(formato.format(precioMedio));
         }
         else {
             miVista.setPrecioMedio(precioMedio+"");

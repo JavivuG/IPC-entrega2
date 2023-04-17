@@ -14,6 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
@@ -31,9 +33,10 @@ public class ControladorBusqueda {
     public ControladorBusqueda(VistaBusqueda vista){
         this.miVista=vista;
         this.miModelo=Main.getBiblioteca();
-        ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
-        if (listaLibros.size()>0){
-            miVista.actualizaListaLibros(listaLibros);
+        
+        if (miModelo.getListaLibros().size()>0){
+
+            miVista.actualizaListaLibros(convertirArray(miModelo.getListaLibros()));
         }
     }
     
@@ -89,7 +92,7 @@ public class ControladorBusqueda {
                 contadorLineas++;
             }
             if (contadorLibros>0){
-                miVista.actualizaListaLibros(miModelo.getListaLibros());
+                miVista.actualizaListaLibros(convertirArray(miModelo.getListaLibros()));
                 miVista.mostrarMensajeExito("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero");
             }
             else {
@@ -139,5 +142,85 @@ public class ControladorBusqueda {
                 miVista.mostrarMensajeError("Debe seleccionar un libro de la lista"); 
             }
         }
+    }
+    
+     /**
+     * Procesa el evento generado para borrar un libro de la lista
+     * Debe haber un libro seleccionado
+     */
+    public void procesarEventoBorrar(){
+        int indice=miVista.getElementoListaSeleccionado();
+        if (indice!=-1){ // Si hay un elemento seleccionado
+            miModelo.borraLibro(indice);
+            ReferenciaLibro[] listaLibros = new ReferenciaLibro[miModelo.getListaLibros().size()];
+            miVista.actualizaListaLibros(miModelo.getListaLibros().toArray(listaLibros));
+            miVista.mostrarMensajeExito("El libro seleccionado se ha borrado de la lista");
+        }
+        else { // Si no hay ningun elemento seleccionado
+            if (miModelo.getListaLibros().isEmpty()){
+                miVista.mostrarMensajeError("No hay libros en la lista");
+            }
+            else {
+                miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
+            }
+        }
+    }
+    
+    public void procesarEventoOrdenar(int modoOrdenacion){
+        ArrayList<ReferenciaLibro> listaLibros = miModelo.getListaLibros();
+        
+        if (modoOrdenacion==0){
+            miVista.actualizaListaLibros(convertirArray(listaLibros));
+            miVista.mostrarMensajeExito("Se ha restaurado el orden de los libros");
+        }
+        else if (modoOrdenacion==1){ // Alfabeticamente (menor a mayor)
+            String[] datos=new String[listaLibros.size()];
+            
+            for (int i=0; i<listaLibros.size(); i++){
+                ReferenciaLibro libro = listaLibros.get(i);
+                datos[i]=libro.imprimirEnBusqueda();
+            }
+            
+            Arrays.sort(datos);
+            miVista.actualizaListaLibros(datos);
+            miVista.mostrarMensajeExito("Los libros se han ordenado alfabeticamente de menor a mayor");
+        }
+        else if (modoOrdenacion==2){ // Alfabeticamente (mayor a menor)
+            String[] datos=new String[listaLibros.size()];
+            
+            for (int i=0; i<listaLibros.size(); i++){
+                ReferenciaLibro libro = listaLibros.get(i);
+                datos[i]=libro.imprimirEnBusqueda();
+            }
+            
+            Arrays.sort(datos);
+            Collections.reverse(Arrays.asList(datos)); 
+            miVista.actualizaListaLibros(datos);
+            miVista.mostrarMensajeExito("Los libros se han ordenado alfabeticamente de mayor a menor");
+        }
+        else if (modoOrdenacion==3) {
+            ReferenciaLibro[] datos=convertirArray(listaLibros);
+            
+            Arrays.sort(datos);
+            miVista.actualizaListaLibros(datos);
+            miVista.mostrarMensajeExito("Los libros se han ordenado segun su precio de menor a mayor");
+        }
+        else if (modoOrdenacion==4){
+            ReferenciaLibro[] datos=convertirArray(listaLibros);
+            
+            for (int i=0; i<listaLibros.size(); i++){
+                datos[i]=listaLibros.get(i);
+            }
+            
+            Arrays.sort(datos);
+            Collections.reverse(Arrays.asList(datos));
+            miVista.actualizaListaLibros(datos);
+            miVista.mostrarMensajeExito("Los libros se han ordenado segun su precio de mayor a menor");
+        }
+    }
+   
+    private ReferenciaLibro[] convertirArray(ArrayList<ReferenciaLibro> listaLibros){
+        ReferenciaLibro[] listaNueva = new ReferenciaLibro[listaLibros.size()];
+        return listaLibros.toArray(listaNueva);
     }
 }

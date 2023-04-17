@@ -5,6 +5,7 @@
 package com.entrega2.vista;
 
 import com.entrega2.modelo.ReferenciaLibro;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -46,7 +47,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         buscarTextField = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
         buscarButton = new javax.swing.JButton();
         filtrarComboBox = new javax.swing.JComboBox<>();
         ordenarComboBox = new javax.swing.JComboBox<>();
@@ -104,31 +104,32 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
 
         jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         buscarTextField.setText("Buscar");
         buscarTextField.setToolTipText("");
         buscarTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        buscarTextField.setPreferredSize(new java.awt.Dimension(320, 24));
+        buscarTextField.setPreferredSize(new java.awt.Dimension(230, 24));
         jPanel9.add(buscarTextField);
 
-        jPanel1.add(jPanel9);
-
-        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
         buscarButton.setText("Buscar");
-        jPanel7.add(buscarButton);
+        jPanel9.add(buscarButton);
 
         filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
-        jPanel7.add(filtrarComboBox);
+        jPanel9.add(filtrarComboBox);
 
         ordenarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar:", "Alfabeticamente (menor a mayor)", "Alfabeticamente (mayor a menor)", "Precio (menor a mayor)", "Precio (mayor a menor)" }));
-        ordenarComboBox.setPreferredSize(new java.awt.Dimension(128, 24));
-        jPanel7.add(ordenarComboBox);
+        ordenarComboBox.setPreferredSize(new java.awt.Dimension(214, 24));
+        ordenarComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ordenarComboBoxItemStateChanged(evt);
+            }
+        });
+        jPanel9.add(ordenarComboBox);
 
-        jPanel1.add(jPanel7);
+        jPanel1.add(jPanel9);
 
         jPanel4.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -141,6 +142,11 @@ public class VistaBusqueda extends javax.swing.JFrame {
         librosList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 librosListMouseClicked(evt);
+            }
+        });
+        librosList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                librosListKeyPressed(evt);
             }
         });
         jScrollPane2.setViewportView(librosList);
@@ -256,6 +262,23 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_librosListMouseClicked
 
+    private void librosListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_librosListKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE){
+            miControlador.procesarEventoBorrar();
+        }
+        else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (librosList.getSelectedIndex()!=-1){ // Si hay seleccionado un elemento
+                librosList.clearSelection();
+            }
+        }
+    }//GEN-LAST:event_librosListKeyPressed
+
+    private void ordenarComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ordenarComboBoxItemStateChanged
+        if (evt.getSource() == ordenarComboBox){
+            miControlador.procesarEventoOrdenar(ordenarComboBox.getSelectedIndex());
+        }
+    }//GEN-LAST:event_ordenarComboBoxItemStateChanged
+    
     public int getElementoListaSeleccionado(){
         return librosList.getSelectedIndex();
     }
@@ -269,14 +292,21 @@ public class VistaBusqueda extends javax.swing.JFrame {
         errorLabel1.setText("");
         exitoLabel1.setText(mensaje);
     }
-    
-    public void actualizaListaLibros(ArrayList<ReferenciaLibro> listaLibros){
-        String[] datos=new String[listaLibros.size()];
-        for (int i=0; i<listaLibros.size(); i++){
-            datos[i]=listaLibros.get(i).toString();
-        }
-        librosList.setListData(datos); 
+   
+    public void actualizaListaLibros(String[] listaLibros){
+        librosList.setListData(listaLibros); 
     }
+    
+    public void actualizaListaLibros(ReferenciaLibro[] listaLibros){
+        String[] lista=new String[listaLibros.length];
+        for (int i=0; i<listaLibros.length; i++){
+            ReferenciaLibro libro = listaLibros[i];
+            lista[i]=libro.imprimirEnBusqueda();
+
+        }
+        librosList.setListData(lista); 
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarButton;
@@ -307,7 +337,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;

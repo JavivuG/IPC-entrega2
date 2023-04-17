@@ -9,7 +9,7 @@ package com.entrega2.modelo;
  * @author javivu
  * @author mgonzal
  */
-public class ReferenciaLibro {
+public class ReferenciaLibro implements Comparable<ReferenciaLibro>{
     private String titulo;
     private String isbn;
     private String descripcion;
@@ -204,6 +204,15 @@ public class ReferenciaLibro {
         else{
             return false;
         }
+    }
+    
+    public String imprimirEnBusqueda(){
+        return  "Titulo: "+ getTitulo() +" ISBN: "+ getISBN() + " Precio: "+ getPrecio();
+    }
+    
+    @Override
+    public int compareTo(ReferenciaLibro otroLibro) {
+        return Double.compare(this.precio, otroLibro.getPrecio());
     }
      
 }
