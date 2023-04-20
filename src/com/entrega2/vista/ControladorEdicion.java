@@ -55,29 +55,29 @@ public class ControladorEdicion {
             if (indice!=-1){ // Si hay un libro seleccionado
                 
                 if (indice>=miModelo.getListaLibros().size()){
-                    miVista.mostrarMensajeError("El indice del libro seleccionado es incorrecto");
+                    miVista.mostrarMensaje("El indice del libro seleccionado es incorrecto", true);
                     error=true;
                 }
                 
                 if (!miModelo.getLibro(indice).equals(libro)){ // Si los isbn son iguales entonces puedo cambiar el libro
-                    miVista.mostrarMensajeError("No puedes modificar el ISBN de un libro existente");
+                    miVista.mostrarMensaje("No puedes modificar el ISBN de un libro existente", true);
                     error=true;
                 }
                 else {
                     if (miModelo.reemplazarLibro(libro, indice)){ // Actualizo la informacion del libro seleccionado
-                        miVista.mostrarMensajeExito("El libro se ha actualizado correctamente");
+                        miVista.mostrarMensaje("El libro se ha actualizado correctamente", false);
                     }
                     else {
-                        miVista.mostrarMensajeError("Ya existe un libro con el mismo ISBN en la lista.");
+                        miVista.mostrarMensaje("Ya existe un libro con el mismo ISBN en la lista.", true);
                     }
                 }
             }
             else { // Si no hay ningun libro seleccionado
                 if (miModelo.addLibro(libro)){ // Añade el libro a la lista
-                    miVista.mostrarMensajeExito("El libro se ha añadido a la lista satisfactoriamente");
+                    miVista.mostrarMensaje("El libro se ha añadido a la lista satisfactoriamente", false);
                 } 
                 else {
-                    miVista.mostrarMensajeError("Ya existe un libro con el mismo ISBN en la lista.");
+                    miVista.mostrarMensaje("Ya existe un libro con el mismo ISBN en la lista.", true);
                 }
             }
             
@@ -97,7 +97,7 @@ public class ControladorEdicion {
         }
         
         if (error){
-            miVista.mostrarMensajeError(mensajeError);
+            miVista.mostrarMensaje(mensajeError, true);
         }
     }
     
@@ -109,14 +109,14 @@ public class ControladorEdicion {
         int indice=miVista.elementoListaSeleccionado();
         if (indice!=-1){ // Si hay elemento seleccionado
             miVista.editarLibro(miModelo.getLibro(indice));
-            miVista.mostrarMensajeExito("Editando libro...");
+            miVista.mostrarMensaje("Editando libro...", false);
         }
         else {
             if (miModelo.getListaLibros().isEmpty()){ // Si no hay libros
-                miVista.mostrarMensajeError("No hay libros en la lista");
+                miVista.mostrarMensaje("No hay libros en la lista", true);
             }
             else {
-                miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
+                miVista.mostrarMensaje("Debe seleccionar un libro de la lista", true);
             }
         }
     }
@@ -130,14 +130,14 @@ public class ControladorEdicion {
         if (indice!=-1){ // Si hay un elemento seleccionado
             miModelo.borraLibro(indice);
             miVista.actualizaListaLibros(miModelo.getListaLibros());
-            miVista.mostrarMensajeExito("El libro se ha borrado de la lista");
+            miVista.mostrarMensaje("El libro se ha borrado de la lista", false);
         }
         else { // Si no hay ningun elemento seleccionado
             if (miModelo.getListaLibros().isEmpty()){
-                miVista.mostrarMensajeError("No hay libros en la lista");
+                miVista.mostrarMensaje("No hay libros en la lista", true);
             }
             else {
-                miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
+                miVista.mostrarMensaje("Debe seleccionar un libro de la lista", true);
             }
         }
     }

@@ -5,6 +5,7 @@
 package com.entrega2.vista;
 
 import com.entrega2.modelo.ReferenciaLibro;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -66,9 +67,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         editarButton = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
-        errorLabel1 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        exitoLabel1 = new javax.swing.JLabel();
+        mensajeLabel = new javax.swing.JLabel();
 
         seleccionFichero.setDialogTitle("");
 
@@ -204,17 +203,10 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
-        errorLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel17.add(errorLabel1);
+        mensajeLabel.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel17.add(mensajeLabel);
 
         jPanel8.add(jPanel17, java.awt.BorderLayout.CENTER);
-
-        jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
-
-        exitoLabel1.setForeground(new java.awt.Color(0, 153, 0));
-        jPanel18.add(exitoLabel1);
-
-        jPanel8.add(jPanel18, java.awt.BorderLayout.EAST);
 
         jPanel5.add(jPanel8, java.awt.BorderLayout.PAGE_END);
 
@@ -283,16 +275,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
         return librosList.getSelectedIndex();
     }
     
-    public void mostrarMensajeError(String mensaje){
-        exitoLabel1.setText("");
-        errorLabel1.setText(mensaje);
+    public void mostrarMensaje(String mensaje, boolean error){
+        if (error){
+            mensajeLabel.setForeground(Color.red);
+        }else {
+            mensajeLabel.setForeground(Color.green);
+        }
+        mensajeLabel.setText(mensaje); 
     }
-    
-    public void mostrarMensajeExito(String mensaje){
-        errorLabel1.setText("");
-        exitoLabel1.setText(mensaje);
-    }
-   
+
     public void actualizaListaLibros(String[] listaLibros){
         librosList.setListData(listaLibros); 
     }
@@ -313,8 +304,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JTextField buscarTextField;
     private javax.swing.JButton cargarButton;
     private javax.swing.JButton editarButton;
-    private javax.swing.JLabel errorLabel1;
-    private javax.swing.JLabel exitoLabel1;
     private javax.swing.JButton exportarButton;
     private javax.swing.JFileChooser exportarLibros;
     private javax.swing.JComboBox<String> filtrarComboBox;
@@ -330,7 +319,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -341,6 +329,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> librosList;
+    private javax.swing.JLabel mensajeLabel;
     private javax.swing.JComboBox<String> ordenarComboBox;
     private javax.swing.JFileChooser seleccionFichero;
     // End of variables declaration//GEN-END:variables

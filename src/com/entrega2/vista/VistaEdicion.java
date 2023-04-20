@@ -5,6 +5,7 @@
 package com.entrega2.vista;
 
 import com.entrega2.modelo.ReferenciaLibro;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
@@ -64,9 +65,7 @@ public class VistaEdicion extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        errorLabel = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        exitoLabel = new javax.swing.JLabel();
+        mensajeLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         librosList = new javax.swing.JList<>();
@@ -159,17 +158,10 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
-        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel9.add(errorLabel);
+        mensajeLabel.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel9.add(mensajeLabel);
 
         jPanel1.add(jPanel9, java.awt.BorderLayout.CENTER);
-
-        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
-
-        exitoLabel.setForeground(new java.awt.Color(0, 153, 0));
-        jPanel7.add(exitoLabel);
-
-        jPanel1.add(jPanel7, java.awt.BorderLayout.EAST);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
@@ -501,23 +493,13 @@ public class VistaEdicion extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * Muestra en el errorLabel (esquina inferior izquierda) un error
-     * @param mensaje Error que se desea mostrar
-     */
-    public void mostrarMensajeError(String mensaje){
-        errorLabel.setText(mensaje);
-        exitoLabel.setText("");
-    }
-    
-    /**
-     * Muestra en el exitoLabel (esquina inferior derecha) un mensaje o mensaje de exito
-     * Por ejemplo: cuando se añade un libro se mostrará que se ha añadido un libro a la lista
-     * @param mensaje Mensaje de exito que se desea mostrar
-     */
-    public void mostrarMensajeExito(String mensaje){
-        exitoLabel.setText(mensaje);
-        errorLabel.setText("");
+   public void mostrarMensaje(String mensaje, boolean error){
+        if (error){
+            mensajeLabel.setForeground(Color.red);
+        }else {
+            mensajeLabel.setForeground(Color.green);
+        }
+        mensajeLabel.setText(mensaje); 
     }
     
     /**
@@ -644,9 +626,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JSpinner decimalesSpinner;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JButton editarButton;
-    private javax.swing.JLabel errorLabel;
     private javax.swing.JComboBox<String> estadoComboBox;
-    private javax.swing.JLabel exitoLabel;
     private javax.swing.JButton guardarButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -685,13 +665,13 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JCheckBox leidoCheckBox;
     private javax.swing.JList<String> librosList;
+    private javax.swing.JLabel mensajeLabel;
     private javax.swing.JTextField referenciaTextField;
     private javax.swing.JTextField tituloTextField;
     private javax.swing.JSpinner unidadesSpinner;

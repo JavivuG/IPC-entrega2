@@ -93,20 +93,20 @@ public class ControladorBusqueda {
             }
             if (contadorLibros>0){
                 miVista.actualizaListaLibros(convertirArray(miModelo.getListaLibros()));
-                miVista.mostrarMensajeExito("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero");
+                miVista.mostrarMensaje("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero", false);
             }
             else {
                 if (ficheroNoEsCorrecto){
-                    miVista.mostrarMensajeError("El fichero no es correcto");
+                    miVista.mostrarMensaje("El fichero no es correcto", true);
                 }
                 else {
-                    miVista.mostrarMensajeError("No se han podido añadir nuevos libros");
+                    miVista.mostrarMensaje("No se han podido añadir nuevos libros", true);
                 }
             }
             reader.close();
         }
         catch (IOException e){
-            miVista.mostrarMensajeError("No se ha encontrado el fichero");
+            miVista.mostrarMensaje("No se ha encontrado el fichero", true);
         }
 
     }
@@ -121,11 +121,11 @@ public class ControladorBusqueda {
                         +libro.getISBN()+";"+libro.getEstado()+";"+libro.getPrecio()+";"+libro.isLeido()+"\n");
             }
             
-            miVista.mostrarMensajeExito("Se han exportado "+ listaLibros.size()+ " libros");
+            miVista.mostrarMensaje("Se han exportado "+ listaLibros.size()+ " libros", false);
 
             escritor.close();
         } catch (IOException e){
-            miVista.mostrarMensajeError("No se puedo crear el fichero de exportación");
+            miVista.mostrarMensaje("No se puedo crear el fichero de exportación", true);
         }
     }
     
@@ -136,10 +136,10 @@ public class ControladorBusqueda {
         }
         else {
             if (miModelo.getListaLibros().isEmpty()){
-                miVista.mostrarMensajeError("No hay libros en la lista");
+                miVista.mostrarMensaje("No hay libros en la lista", true);
             }
             else {
-                miVista.mostrarMensajeError("Debe seleccionar un libro de la lista"); 
+                miVista.mostrarMensaje("Debe seleccionar un libro de la lista", true); 
             }
         }
     }
@@ -154,14 +154,14 @@ public class ControladorBusqueda {
             miModelo.borraLibro(indice);
             ReferenciaLibro[] listaLibros = new ReferenciaLibro[miModelo.getListaLibros().size()];
             miVista.actualizaListaLibros(miModelo.getListaLibros().toArray(listaLibros));
-            miVista.mostrarMensajeExito("El libro seleccionado se ha borrado de la lista");
+            miVista.mostrarMensaje("El libro seleccionado se ha borrado de la lista", false);
         }
         else { // Si no hay ningun elemento seleccionado
             if (miModelo.getListaLibros().isEmpty()){
-                miVista.mostrarMensajeError("No hay libros en la lista");
+                miVista.mostrarMensaje("No hay libros en la lista", true);
             }
             else {
-                miVista.mostrarMensajeError("Debe seleccionar un libro de la lista");
+                miVista.mostrarMensaje("Debe seleccionar un libro de la lista", true);
             }
         }
     }
@@ -171,7 +171,7 @@ public class ControladorBusqueda {
         
         if (modoOrdenacion==0){
             miVista.actualizaListaLibros(convertirArray(listaLibros));
-            miVista.mostrarMensajeExito("Se ha restaurado el orden de los libros");
+            miVista.mostrarMensaje("Se ha restaurado el orden de los libros", false);
         }
         else if (modoOrdenacion==1){ // Alfabeticamente (menor a mayor)
             String[] datos=new String[listaLibros.size()];
@@ -183,7 +183,7 @@ public class ControladorBusqueda {
             
             Arrays.sort(datos);
             miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensajeExito("Los libros se han ordenado alfabeticamente de menor a mayor");
+            miVista.mostrarMensaje("Los libros se han ordenado alfabeticamente de menor a mayor", false);
         }
         else if (modoOrdenacion==2){ // Alfabeticamente (mayor a menor)
             String[] datos=new String[listaLibros.size()];
@@ -196,14 +196,14 @@ public class ControladorBusqueda {
             Arrays.sort(datos);
             Collections.reverse(Arrays.asList(datos)); 
             miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensajeExito("Los libros se han ordenado alfabeticamente de mayor a menor");
+            miVista.mostrarMensaje("Los libros se han ordenado alfabeticamente de mayor a menor", false);
         }
         else if (modoOrdenacion==3) {
             ReferenciaLibro[] datos=convertirArray(listaLibros);
             
             Arrays.sort(datos);
             miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensajeExito("Los libros se han ordenado segun su precio de menor a mayor");
+            miVista.mostrarMensaje("Los libros se han ordenado segun su precio de menor a mayor", false);
         }
         else if (modoOrdenacion==4){
             ReferenciaLibro[] datos=convertirArray(listaLibros);
@@ -215,7 +215,7 @@ public class ControladorBusqueda {
             Arrays.sort(datos);
             Collections.reverse(Arrays.asList(datos));
             miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensajeExito("Los libros se han ordenado segun su precio de mayor a menor");
+            miVista.mostrarMensaje("Los libros se han ordenado segun su precio de mayor a menor", false);
         }
     }
    
