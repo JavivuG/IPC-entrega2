@@ -8,6 +8,7 @@ import com.entrega2.modelo.ReferenciaLibro;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -24,6 +25,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     public VistaEdicion() {
         initComponents();
         miControlador=new ControladorEdicion(this);
+        atajosPanel = new JOptionPane();
         // Hago que no pueda poner numeros negativos en ninguno de los spinner
         ((SpinnerNumberModel) unidadesSpinner.getModel()).setMinimum(0);
         ((SpinnerNumberModel) decimalesSpinner.getModel()).setMinimum(0);
@@ -57,6 +59,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        atajosPanel = new javax.swing.JOptionPane();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         atajosButton = new javax.swing.JButton();
@@ -472,7 +475,12 @@ public class VistaEdicion extends javax.swing.JFrame {
     }//GEN-LAST:event_librosListMouseClicked
 
     private void atajosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atajosButtonActionPerformed
-        // TODO
+        String[] mensajes={"<ESC> Dejar de seleccionar un libro", 
+            "<SUPR> Borra el libro seleccionado en la lista",
+            "<ENTER> Pulsar un boton", 
+            "<ALT+[1..9]> Mientras se selecciona boton de editar o borrar para seleccionar libro de la lista",
+            "<Doble click> En un libro de la lista para editarlo"};
+        atajosPanel.showMessageDialog(this,mensajes, "Atajos", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_atajosButtonActionPerformed
 
     /**
@@ -622,6 +630,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atajosButton;
+    private javax.swing.JOptionPane atajosPanel;
     private javax.swing.JButton borrarButton;
     private javax.swing.JSpinner decimalesSpinner;
     private javax.swing.JTextArea descripcionTextArea;

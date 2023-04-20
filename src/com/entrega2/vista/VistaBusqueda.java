@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -25,6 +26,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
     public VistaBusqueda() {
         initComponents();
         miControlador=new ControladorBusqueda(this);
+        atajosPanel=new JOptionPane();
     }
 
     /**
@@ -38,6 +40,10 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         seleccionFichero = new javax.swing.JFileChooser();
         exportarLibros = new javax.swing.JFileChooser();
+        atajosPanel = new javax.swing.JOptionPane();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        atajosButton = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -73,6 +79,20 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+
+        atajosButton.setText("Atajos");
+        atajosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atajosButtonActionPerformed(evt);
+            }
+        });
+        jPanel18.add(atajosButton);
+
+        jPanel7.add(jPanel18, java.awt.BorderLayout.EAST);
+
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
         jButton1.setText("Volver");
@@ -91,7 +111,9 @@ public class VistaBusqueda extends javax.swing.JFrame {
         });
         jPanel11.add(jButton2);
 
-        getContentPane().add(jPanel11, java.awt.BorderLayout.NORTH);
+        jPanel7.add(jPanel11, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel7, java.awt.BorderLayout.NORTH);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
@@ -111,6 +133,14 @@ public class VistaBusqueda extends javax.swing.JFrame {
         buscarTextField.setToolTipText("");
         buscarTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         buscarTextField.setPreferredSize(new java.awt.Dimension(230, 24));
+        buscarTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                buscarTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                buscarTextFieldFocusLost(evt);
+            }
+        });
         jPanel9.add(buscarTextField);
 
         buscarButton.setText("Buscar");
@@ -238,12 +268,16 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarButtonActionPerformed
 
     private void exportarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarButtonActionPerformed
+        miControlador.isBibliotecaVacia();
+    }//GEN-LAST:event_exportarButtonActionPerformed
+
+    public void abreVentanaExportar(){
         int result = exportarLibros.showSaveDialog(this);
         if (result == JFileChooser.APPROVE_OPTION){
             miControlador.procesarEventoExportar(exportarLibros.getSelectedFile());
         }
-    }//GEN-LAST:event_exportarButtonActionPerformed
-
+    }   
+    
     private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
         miControlador.procesarEventoEditar();
     }//GEN-LAST:event_editarButtonActionPerformed
@@ -270,6 +304,28 @@ public class VistaBusqueda extends javax.swing.JFrame {
             miControlador.procesarEventoOrdenar(ordenarComboBox.getSelectedIndex());
         }
     }//GEN-LAST:event_ordenarComboBoxItemStateChanged
+
+    private void atajosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atajosButtonActionPerformed
+        String[] mensajes={"<ESC> Dejar de seleccionar un libro", 
+            "<SUPR> Borra el libro seleccionado en la lista",
+            "<ENTER> Pulsar un boton",
+            "<Doble click> En un libro de la lista para editarlo"};
+        atajosPanel.showMessageDialog(this,mensajes, "Atajos", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_atajosButtonActionPerformed
+
+    private void buscarTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTextFieldFocusGained
+        if (buscarTextField.getText().equals("Buscar")) {
+            buscarTextField.setText("");
+            buscarTextField.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_buscarTextFieldFocusGained
+
+    private void buscarTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTextFieldFocusLost
+        if (buscarTextField.getText().equals("")) {
+            buscarTextField.setForeground(Color.gray);
+            buscarTextField.setText("Buscar");
+        }
+    }//GEN-LAST:event_buscarTextFieldFocusLost
     
     public int getElementoListaSeleccionado(){
         return librosList.getSelectedIndex();
@@ -300,6 +356,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atajosButton;
+    private javax.swing.JOptionPane atajosPanel;
     private javax.swing.JButton buscarButton;
     private javax.swing.JTextField buscarTextField;
     private javax.swing.JButton cargarButton;
@@ -319,12 +377,14 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;

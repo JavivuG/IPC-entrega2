@@ -91,8 +91,10 @@ public class Biblioteca {
      * Borra el libro que esta en la posición indice
      * @param indice Posición del libro que se desea borrar
      */
-    public void borraLibro(int indice){
+    public String borraLibro(int indice){
+        String titulo=listaLibros.get(indice).getTitulo();
         listaLibros.remove(indice);
+        return titulo;
     }
     
     public double getPrecioMedio(){

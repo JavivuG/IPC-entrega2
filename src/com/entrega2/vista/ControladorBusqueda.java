@@ -111,22 +111,37 @@ public class ControladorBusqueda {
 
     }
     
-    public void procesarEventoExportar(File fichero){
-        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(fichero))) {
-
-            ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
-            for (int i=0; i<listaLibros.size(); i++){
-                ReferenciaLibro libro=listaLibros.get(i);
-                escritor.write(libro.getTitulo()+";"+libro.getDescripcion()+";"
-                        +libro.getISBN()+";"+libro.getEstado()+";"+libro.getPrecio()+";"+libro.isLeido()+"\n");
-            }
-            
-            miVista.mostrarMensaje("Se han exportado "+ listaLibros.size()+ " libros", false);
-
-            escritor.close();
-        } catch (IOException e){
-            miVista.mostrarMensaje("No se puedo crear el fichero de exportación", true);
+    public void isBibliotecaVacia(){
+        if( miModelo.getListaLibros().isEmpty()){
+            miVista.mostrarMensaje("No hay libros en la lista", true);
         }
+        else {
+            miVista.abreVentanaExportar();
+        }
+    }
+    
+    public void procesarEventoExportar(File fichero){
+        if (miModelo.getListaLibros().isEmpty()){
+            miVista.mostrarMensaje("No hay libros en la lista", true);
+        }
+        else {
+            try (BufferedWriter escritor = new BufferedWriter(new FileWriter(fichero))) {
+
+                ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
+                for (int i=0; i<listaLibros.size(); i++){
+                    ReferenciaLibro libro=listaLibros.get(i);
+                    escritor.write(libro.getTitulo()+";"+libro.getDescripcion()+";"
+                            +libro.getISBN()+";"+libro.getEstado()+";"+libro.getPrecio()+";"+libro.isLeido()+"\n");
+                }
+
+                miVista.mostrarMensaje("Se han exportado "+ listaLibros.size()+ " libros", false);
+
+                escritor.close();
+            } catch (IOException e){
+                miVista.mostrarMensaje("No se puedo crear el fichero de exportación", true);
+            }            
+        }
+
     }
     
     public void procesarEventoEditar(){
@@ -151,10 +166,10 @@ public class ControladorBusqueda {
     public void procesarEventoBorrar(){
         int indice=miVista.getElementoListaSeleccionado();
         if (indice!=-1){ // Si hay un elemento seleccionado
-            miModelo.borraLibro(indice);
+            String titulo=miModelo.borraLibro(indice);
             ReferenciaLibro[] listaLibros = new ReferenciaLibro[miModelo.getListaLibros().size()];
             miVista.actualizaListaLibros(miModelo.getListaLibros().toArray(listaLibros));
-            miVista.mostrarMensaje("El libro seleccionado se ha borrado de la lista", false);
+            miVista.mostrarMensaje("El libro \""+ titulo +"\" se ha borrado de la lista", false);
         }
         else { // Si no hay ningun elemento seleccionado
             if (miModelo.getListaLibros().isEmpty()){
