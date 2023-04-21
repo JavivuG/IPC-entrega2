@@ -45,8 +45,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         atajosButton = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        volverButton = new javax.swing.JButton();
+        cambiarEdicionButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -94,21 +94,21 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        volverButton.setText("Volver");
+        volverButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                volverButtonActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton1);
+        jPanel11.add(volverButton);
 
-        jButton2.setText("Edición");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cambiarEdicionButton.setText("Edición");
+        cambiarEdicionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cambiarEdicionButtonActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton2);
+        jPanel11.add(cambiarEdicionButton);
 
         jPanel7.add(jPanel11, java.awt.BorderLayout.CENTER);
 
@@ -250,13 +250,13 @@ public class VistaBusqueda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void volverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverButtonActionPerformed
         this.miControlador.procesarRedirrecionInicial();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_volverButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cambiarEdicionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarEdicionButtonActionPerformed
         this.miControlador.procesarRedirrecionEdicion();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cambiarEdicionButtonActionPerformed
 
     private void cargarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarButtonActionPerformed
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de texto", "txt");
@@ -387,13 +387,12 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JButton atajosButton;
     private javax.swing.JOptionPane atajosPanel;
     private javax.swing.JTextField buscarTextField;
+    private javax.swing.JButton cambiarEdicionButton;
     private javax.swing.JButton cargarButton;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton exportarButton;
     private javax.swing.JFileChooser exportarLibros;
     private javax.swing.JComboBox<String> filtrarComboBox;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -419,5 +418,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
     private javax.swing.JLabel mensajeLabel;
     private javax.swing.JComboBox<String> ordenarComboBox;
     private javax.swing.JFileChooser seleccionFichero;
+    private javax.swing.JButton volverButton;
     // End of variables declaration//GEN-END:variables
 }

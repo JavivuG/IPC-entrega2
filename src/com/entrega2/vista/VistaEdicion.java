@@ -69,8 +69,8 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         atajosButton = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        volverButton = new javax.swing.JButton();
+        buscarButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -143,21 +143,21 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        volverButton.setText("Volver");
+        volverButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                volverButtonActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton1);
+        jPanel11.add(volverButton);
 
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buscarButton.setText("Buscar");
+        buscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buscarButtonActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton2);
+        jPanel11.add(buscarButton);
 
         jPanel12.add(jPanel11, java.awt.BorderLayout.CENTER);
 
@@ -471,13 +471,13 @@ public class VistaEdicion extends javax.swing.JFrame {
         seleccionElementosLista(evt);
     }//GEN-LAST:event_borrarButtonKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void volverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverButtonActionPerformed
         this.miControlador.procesarRedirrecionInicial();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_volverButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
         this.miControlador.procesarRedirrecionBusqueda();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void descripcionTextAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionTextAreaKeyPressed
         if(evt.getKeyChar() == '\t'){
@@ -650,13 +650,12 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JButton atajosButton;
     private javax.swing.JOptionPane atajosPanel;
     private javax.swing.JButton borrarButton;
+    private javax.swing.JButton buscarButton;
     private javax.swing.JSpinner decimalesSpinner;
     private javax.swing.JTextArea descripcionTextArea;
     private javax.swing.JButton editarButton;
     private javax.swing.JComboBox<String> estadoComboBox;
     private javax.swing.JButton guardarButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -705,5 +704,6 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JTextField referenciaTextField;
     private javax.swing.JTextField tituloTextField;
     private javax.swing.JSpinner unidadesSpinner;
+    private javax.swing.JButton volverButton;
     // End of variables declaration//GEN-END:variables
 }
