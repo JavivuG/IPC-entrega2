@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -238,4 +239,70 @@ public class ControladorBusqueda {
         ReferenciaLibro[] listaNueva = new ReferenciaLibro[listaLibros.size()];
         return listaLibros.toArray(listaNueva);
     }
+    
+    public void procesarEventoBuscar(){
+        int indice=miVista.getFiltrarComboBoxIndex();
+        String textoABuscar=convertirCadena(miVista.getBuscarTextField());
+        ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
+        ArrayList<ReferenciaLibro> listaBuscada=new ArrayList<>();
+        
+        if (listaLibros.isEmpty()){
+            miVista.mostrarMensaje("No hay libros en la lista", true);
+        }
+        else if (!textoABuscar.equals("")){
+            if (indice==0){
+                for (ReferenciaLibro libro : listaLibros){
+                    String titulo=convertirCadena(libro.getTitulo());
+                    String isbn=convertirCadena(libro.getISBN());
+                    
+                    if (titulo.contains(textoABuscar) || isbn.contains(textoABuscar)){
+                        listaBuscada.add(libro);
+                    }
+                }
+            }
+            else if (indice==1) {
+                for (ReferenciaLibro libro : listaLibros){
+                    String titulo=convertirCadena(libro.getTitulo());
+                    
+                    if (titulo.contains(textoABuscar)){
+                        listaBuscada.add(libro);
+                    }
+                }
+            }
+            else if (indice==2) {
+                for (ReferenciaLibro libro : listaLibros){
+                    String isbn=convertirCadena(libro.getISBN());
+                    
+                    if (isbn.contains(textoABuscar)){
+                        listaBuscada.add(libro);
+                    }
+                }
+            } 
+            else {
+                miVista.mostrarMensaje("Opcion de filtrado no valida", true);
+            }
+            
+            if (listaBuscada.isEmpty()){
+                miVista.mostrarMensaje("No se ha encontrado ningun libro", true);
+            }
+            else {
+                miVista.mostrarMensaje("Se han encontrado "+ listaBuscada.size() +" coincidencias con la busqueda", false);
+            }
+            miVista.actualizaListaLibros(convertirArray(listaBuscada));
+        }
+        else {
+            miVista.mostrarMensaje("", false);
+            miVista.actualizaListaLibros(convertirArray(listaLibros));
+        }
+        
+    }
+    
+    private String convertirCadena(String texto){
+        String palabraSinAcentos = Normalizer.normalize(texto.toLowerCase(), 
+                Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        return palabraSinAcentos;
+ 
+    }
+    
+    
 }

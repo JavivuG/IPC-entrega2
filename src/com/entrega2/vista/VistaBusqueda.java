@@ -6,6 +6,7 @@ package com.entrega2.vista;
 
 import com.entrega2.modelo.ReferenciaLibro;
 import java.awt.Color;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -54,7 +55,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         buscarTextField = new javax.swing.JTextField();
-        buscarButton = new javax.swing.JButton();
         filtrarComboBox = new javax.swing.JComboBox<>();
         ordenarComboBox = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
@@ -141,10 +141,12 @@ public class VistaBusqueda extends javax.swing.JFrame {
                 buscarTextFieldFocusLost(evt);
             }
         });
+        buscarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarTextFieldKeyReleased(evt);
+            }
+        });
         jPanel9.add(buscarTextField);
-
-        buscarButton.setText("Buscar");
-        jPanel9.add(buscarButton);
 
         filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
         jPanel9.add(filtrarComboBox);
@@ -305,6 +307,10 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ordenarComboBoxItemStateChanged
 
+    public int getFiltrarComboBoxIndex(){
+        return filtrarComboBox.getSelectedIndex();
+    }
+    
     private void atajosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atajosButtonActionPerformed
         String[] mensajes={"<ESC> Dejar de seleccionar un libro", 
             "<SUPR> Borra el libro seleccionado en la lista",
@@ -326,6 +332,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
             buscarTextField.setText("Buscar");
         }
     }//GEN-LAST:event_buscarTextFieldFocusLost
+
+    private void buscarTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarTextFieldKeyReleased
+        if ((evt.getKeyCode() >= 32 && evt.getKeyCode()<=127) || evt.getKeyCode() == 8){
+            miControlador.procesarEventoBuscar();
+        }
+        else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().clearFocusOwner();
+        }
+    }//GEN-LAST:event_buscarTextFieldKeyReleased
     
     public int getElementoListaSeleccionado(){
         return librosList.getSelectedIndex();
@@ -353,12 +368,16 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
         librosList.setListData(lista); 
     }
+    
+    public String getBuscarTextField(){
+        return buscarTextField.getText();
+    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atajosButton;
     private javax.swing.JOptionPane atajosPanel;
-    private javax.swing.JButton buscarButton;
     private javax.swing.JTextField buscarTextField;
     private javax.swing.JButton cargarButton;
     private javax.swing.JButton editarButton;
