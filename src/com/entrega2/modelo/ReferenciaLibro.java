@@ -182,7 +182,7 @@ public class ReferenciaLibro implements Comparable<ReferenciaLibro>{
      */
     @Override
     public String toString(){
-        return "Titulo:"+getTitulo()+" ISBN:"+getISBN();
+        return "Titulo: "+getTitulo()+" ISBN: "+getISBN();
     }
     
     /**

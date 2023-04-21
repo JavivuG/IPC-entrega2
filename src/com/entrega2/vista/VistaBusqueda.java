@@ -8,7 +8,6 @@ import com.entrega2.modelo.ReferenciaLibro;
 import java.awt.Color;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -307,6 +306,15 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ordenarComboBoxItemStateChanged
 
+    public String getLibro(){
+        if (librosList.getSelectedIndex()!=-1){
+             return librosList.getModel().getElementAt(librosList.getSelectedIndex());
+        }
+        return null;
+        
+    }
+    
+    
     public int getFiltrarComboBoxIndex(){
         return filtrarComboBox.getSelectedIndex();
     }
@@ -342,7 +350,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarTextFieldKeyReleased
     
-    public int getElementoListaSeleccionado(){
+    public int getIndiceListaSeleccionado(){
         return librosList.getSelectedIndex();
     }
     
@@ -350,7 +358,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         if (error){
             mensajeLabel.setForeground(Color.red);
         }else {
-            mensajeLabel.setForeground(Color.green);
+            mensajeLabel.setForeground(new Color(51, 204, 0));
         }
         mensajeLabel.setText(mensaje); 
     }

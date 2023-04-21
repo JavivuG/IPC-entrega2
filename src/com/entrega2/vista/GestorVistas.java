@@ -28,13 +28,13 @@ public class GestorVistas {
         vistaActual.setVisible(true);
     }
     
-    public void mostrarVistaEdicion(ReferenciaLibro libro, Integer indice){ // Con los datos para editar
+    public void mostrarVistaEdicion(ReferenciaLibro libro){ // Con los datos para editar
         if (vistaActual != null) {
             vistaActual.setVisible(false);
             vistaActual.dispose();
         }
-        if (libro!=null && indice!=null){
-            vistaActual = new VistaEdicion(libro,  indice);
+        if (libro!=null){
+            vistaActual = new VistaEdicion(libro);
         }
         else {
             vistaActual = new VistaEdicion();

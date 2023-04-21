@@ -29,7 +29,7 @@ public class ControladorInicial {
     }
     
     public void procesarRedireccionEdicion(){
-        Main.getGestorVistas().mostrarVistaEdicion(null,null);
+        Main.getGestorVistas().mostrarVistaEdicion(null);
     }
     
     public void procesarRedireccionBusqueda(){

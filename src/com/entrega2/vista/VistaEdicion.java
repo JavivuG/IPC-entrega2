@@ -37,19 +37,24 @@ public class VistaEdicion extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public VistaEdicion(ReferenciaLibro libro, int indice) {
+    public VistaEdicion(ReferenciaLibro libro) {
         initComponents();
         miControlador=new ControladorEdicion(this);
         // Hago que no pueda poner numeros negativos en ninguno de los spinner
         ((SpinnerNumberModel) unidadesSpinner.getModel()).setMinimum(0);
         ((SpinnerNumberModel) decimalesSpinner.getModel()).setMinimum(0);
         ((SpinnerNumberModel) decimalesSpinner.getModel()).setMaximum(99);
-
+        
+        int indice;
         librosList.setSelectionMode(1);
-        librosList.setSelectedIndex(indice);
-        miControlador.procesarEventoEditar();
-    }
+        if ((indice=miControlador.seleccionaLibro(libro))!=-1){
+            librosList.setSelectedIndex(indice);
+            miControlador.procesarEventoEditar();
 
+        }
+    }
+   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +71,9 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         mensajeLabel = new javax.swing.JLabel();
@@ -155,6 +163,14 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         getContentPane().add(jPanel12, java.awt.BorderLayout.PAGE_START);
 
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
+        jLabel2.setText("Edición de Libros");
+        jPanel19.add(jLabel2);
+
+        jPanel7.add(jPanel19, java.awt.BorderLayout.NORTH);
+
         jPanel1.setMinimumSize(new java.awt.Dimension(10, 25));
         jPanel1.setPreferredSize(new java.awt.Dimension(10, 25));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -166,7 +182,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel1.add(jPanel9, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        jPanel7.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         jPanel2.setMinimumSize(new java.awt.Dimension(500, 130));
         jPanel2.setPreferredSize(new java.awt.Dimension(280, 130));
@@ -190,7 +206,7 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_END);
+        jPanel7.add(jPanel2, java.awt.BorderLayout.LINE_END);
 
         jPanel3.setMinimumSize(new java.awt.Dimension(300, 240));
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 240));
@@ -373,7 +389,9 @@ public class VistaEdicion extends javax.swing.JFrame {
 
         jPanel3.add(jPanel21, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+        jPanel7.add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel7, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -505,7 +523,7 @@ public class VistaEdicion extends javax.swing.JFrame {
         if (error){
             mensajeLabel.setForeground(Color.red);
         }else {
-            mensajeLabel.setForeground(Color.green);
+            mensajeLabel.setForeground(new Color(51, 204, 0));
         }
         mensajeLabel.setText(mensaje); 
     }
@@ -641,6 +659,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -654,6 +673,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
@@ -674,6 +694,7 @@ public class VistaEdicion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;

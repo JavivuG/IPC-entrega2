@@ -121,6 +121,15 @@ public class ControladorEdicion {
         }
     }
     
+    public int seleccionaLibro(ReferenciaLibro libro){
+        for (int i=0; i<miModelo.getListaLibros().size(); i++){
+            if (libro.equals(miModelo.getListaLibros().get(i))){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     /**
      * Procesa el evento generado para borrar un libro de la lista
      * Debe haber un libro seleccionado

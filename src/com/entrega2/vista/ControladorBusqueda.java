@@ -46,7 +46,7 @@ public class ControladorBusqueda {
     }
     
     public void procesarRedirrecionEdicion(){
-        Main.getGestorVistas().mostrarVistaEdicion(null,null);
+        Main.getGestorVistas().mostrarVistaEdicion(null);
     }
     
     public void procesarEventoCargar(File ficheroImportar){
@@ -146,9 +146,9 @@ public class ControladorBusqueda {
     }
     
     public void procesarEventoEditar(){
-        int indice=miVista.getElementoListaSeleccionado();
+        int indice=getIndiceLibro(miVista.getLibro());
         if (indice!=-1){
-            Main.getGestorVistas().mostrarVistaEdicion(miModelo.getListaLibros().get(indice), indice);
+            Main.getGestorVistas().mostrarVistaEdicion(miModelo.getListaLibros().get(indice));
         }
         else {
             if (miModelo.getListaLibros().isEmpty()){
@@ -160,12 +160,25 @@ public class ControladorBusqueda {
         }
     }
     
+    private int getIndiceLibro(String libro){
+        if (libro!=null){
+            for (int i=0;i<miModelo.getListaLibros().size(); i++){
+                String libroBusqueda=miModelo.getLibro(i).imprimirEnBusqueda();
+                if (libroBusqueda.equals(libro)){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+    
      /**
      * Procesa el evento generado para borrar un libro de la lista
      * Debe haber un libro seleccionado
      */
     public void procesarEventoBorrar(){
-        int indice=miVista.getElementoListaSeleccionado();
+         int indice=getIndiceLibro(miVista.getLibro());
+
         if (indice!=-1){ // Si hay un elemento seleccionado
             String titulo=miModelo.borraLibro(indice);
             ReferenciaLibro[] listaLibros = new ReferenciaLibro[miModelo.getListaLibros().size()];
