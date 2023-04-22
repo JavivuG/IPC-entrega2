@@ -36,7 +36,6 @@ public class ControladorBusqueda {
         this.miModelo=Main.getBiblioteca();
         
         if (miModelo.getListaLibros().size()>0){
-
             miVista.actualizaListaLibros(convertirArray(miModelo.getListaLibros()));
         }
     }
@@ -52,7 +51,6 @@ public class ControladorBusqueda {
     public void procesarEventoCargar(File ficheroImportar){
         try (BufferedReader reader = new BufferedReader(new FileReader(ficheroImportar))) {
             int contadorLibros=0, contadorLineas=0;
-            String titulo, descripcion, isbn, estado;
             double precio=0;
             boolean error, leido=false, ficheroNoEsCorrecto=false;
             String linea;
@@ -66,10 +64,6 @@ public class ControladorBusqueda {
                     break;
                 }
 
-                titulo=datosLibro[0];
-                descripcion=datosLibro[1];
-                isbn=datosLibro[2];
-                estado=datosLibro[3];
                 try {
                     precio=Double.parseDouble(datosLibro[4]);
                 }
@@ -85,7 +79,8 @@ public class ControladorBusqueda {
                 }
 
                 if (!error){
-                    ReferenciaLibro libro=new ReferenciaLibro(titulo, descripcion, isbn, estado, precio, leido);
+                    ReferenciaLibro libro=new ReferenciaLibro(datosLibro[0], datosLibro[1],
+                            datosLibro[2], datosLibro[3], precio, leido);
                     if (miModelo.addLibro(libro)){
                         contadorLibros++;   
                     }
@@ -93,7 +88,7 @@ public class ControladorBusqueda {
                 contadorLineas++;
             }
             if (contadorLibros>0){
-                miVista.actualizaListaLibros(convertirArray(miModelo.getListaLibros()));
+                procesarEventoOrdenar(miVista.getOrdenarComboBoxIndex());
                 miVista.mostrarMensaje("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero", false);
             }
             else {
@@ -109,7 +104,6 @@ public class ControladorBusqueda {
         catch (IOException e){
             miVista.mostrarMensaje("No se ha encontrado el fichero", true);
         }
-
     }
     
     public void isBibliotecaVacia(){
@@ -159,6 +153,188 @@ public class ControladorBusqueda {
             }
         }
     }
+        
+     /**
+     * Procesa el evento generado para borrar un libro de la lista
+     * Debe haber un libro seleccionado
+     */
+    public void procesarEventoBorrar(){
+         int indice=getIndiceLibro(miVista.getLibro());
+
+        if (indice!=-1){ // Si hay un elemento seleccionado
+            ReferenciaLibro libroBorrado=miModelo.borraLibro(indice);
+            miModelo.borraLibroBusqueda(libroBorrado);
+            procesarEventoOrdenar(miVista.getOrdenarComboBoxIndex());
+            miVista.mostrarMensaje("El libro \""+ libroBorrado.getTitulo() +"\" se ha borrado de la lista", false);
+        }
+        else { // Si no hay ningun elemento seleccionado
+            if (miModelo.getListaLibros().isEmpty()){
+                miVista.mostrarMensaje("No hay libros en la lista", true);
+            }
+            else {
+                miVista.mostrarMensaje("Debe seleccionar un libro de la lista", true);
+            }
+        }
+    }
+    
+    public void cambioOrdenMensaje(){
+        int modoOrdenacion=miVista.getOrdenarComboBoxIndex();
+        switch (modoOrdenacion) {
+            case 0:
+                miVista.mostrarMensaje("Se ha restaurado el orden de los libros", false);
+                break;
+            case 1:
+                miVista.mostrarMensaje("Los libros se han ordenado alfabeticamente de menor a mayor", false);
+                break;
+            case 2:
+                miVista.mostrarMensaje("Los libros se han ordenado alfabeticamente de mayor a menor", false);
+                break;
+            case 3:
+                miVista.mostrarMensaje("Los libros se han ordenado segun su precio de menor a mayor", false);
+                break;
+            case 4:
+                miVista.mostrarMensaje("Los libros se han ordenado segun su precio de mayor a menor", false);
+                break;
+            default:
+                miVista.mostrarMensaje("Opcion de ordenacion no valida", true);
+        }               
+        procesarEventoOrdenar(modoOrdenacion);
+    }
+    
+    public void procesarEventoOrdenar(int modoOrdenacion){
+        ArrayList<ReferenciaLibro> listaLibros;           
+        String[] datos;
+        ReferenciaLibro[] datosLibros;
+       
+        if (!miVista.getBuscarTextField().equals("") && miVista.isBuscarTextFieldFocused()){
+            listaLibros=miModelo.getListaLibrosBuscada();
+        }
+        else {
+            listaLibros=miModelo.getListaLibros();
+        }
+        
+        switch (modoOrdenacion) {
+            case 0:
+                miVista.actualizaListaLibros(convertirArray(listaLibros));
+                break;
+            case 1:            
+                datos=convertirArrayStrings(listaLibros);
+
+                Arrays.sort(datos);
+                miVista.actualizaListaLibros(datos);
+                break;
+            case 2:
+                datos=convertirArrayStrings(listaLibros);
+
+                Arrays.sort(datos);
+                Collections.reverse(Arrays.asList(datos)); 
+                miVista.actualizaListaLibros(datos);
+                break;
+            case 3:
+                datosLibros=convertirArray(listaLibros);
+                
+                Arrays.sort(datosLibros);
+                miVista.actualizaListaLibros(datosLibros);
+                break;
+            case 4:
+                datosLibros=convertirArray(listaLibros);
+                
+                Arrays.sort(datosLibros);
+                Collections.reverse(Arrays.asList(datosLibros));
+                miVista.actualizaListaLibros(datosLibros);
+                break;
+            default:
+                miVista.mostrarMensaje("Opcion de ordenacion no valida", true);
+        }
+    }
+    
+    public void procesarEventoBuscar(){
+        int indiceFiltrado=miVista.getFiltrarComboBoxIndex();
+        boolean error=false;
+        
+        String textoABuscar=convertirCadena(miVista.getBuscarTextField());
+        ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
+        ArrayList<ReferenciaLibro> listaBuscada=new ArrayList<>();
+        
+        if (listaLibros.isEmpty()){
+            miVista.mostrarMensaje("No hay libros en la lista", true);
+        }
+        else if (!textoABuscar.equals("") && miVista.isBuscarTextFieldFocused()){
+            switch (indiceFiltrado) {
+                case 0:
+                    for (ReferenciaLibro libro : listaLibros){
+                        String titulo=convertirCadena(libro.getTitulo());
+                        String isbn=convertirCadena(libro.getISBN());
+
+                        if (titulo.contains(textoABuscar) || isbn.contains(textoABuscar)){
+                            listaBuscada.add(libro);
+                        }
+                    }
+                    break;
+                case 1:
+                    for (ReferenciaLibro libro : listaLibros){
+                        String titulo=convertirCadena(libro.getTitulo());
+
+                        if (titulo.contains(textoABuscar)){
+                            listaBuscada.add(libro);
+                        }
+                    }                    
+                    break;
+                case 2:
+                    for (ReferenciaLibro libro : listaLibros){
+                        String isbn=convertirCadena(libro.getISBN());
+
+                        if (isbn.contains(textoABuscar)){
+                            listaBuscada.add(libro);
+                        }
+                    }                    
+                    break;
+                default:
+                    miVista.mostrarMensaje("Opcion de filtrado no valida", true);
+                    error=true;
+            }
+
+            if (!error){
+                if (listaBuscada.isEmpty()){
+                    miVista.mostrarMensaje("No se ha encontrado ningun libro", true);
+                }
+                else {
+                    miVista.mostrarMensaje("Se han encontrado "+ listaBuscada.size() +" coincidencias con la busqueda", false);
+                }
+
+                miModelo.setListaLibrosBuscada(listaBuscada);
+                procesarEventoOrdenar(miVista.getOrdenarComboBoxIndex());   
+            }
+
+        }
+        else {
+            miVista.mostrarMensaje("", false);
+            miModelo.setListaLibrosBuscada(listaLibros);
+            procesarEventoOrdenar(miVista.getOrdenarComboBoxIndex());
+        }
+        
+    }
+    
+    private ReferenciaLibro[] convertirArray(ArrayList<ReferenciaLibro> listaLibros){
+        ReferenciaLibro[] listaNueva = new ReferenciaLibro[listaLibros.size()];
+        return listaLibros.toArray(listaNueva);
+    }
+    
+    private String[] convertirArrayStrings(ArrayList<ReferenciaLibro> listaLibros){
+        String[] datos=new String[listaLibros.size()];
+        for (int i=0; i<listaLibros.size(); i++){
+            ReferenciaLibro libro = listaLibros.get(i);
+            datos[i]=libro.imprimirEnBusqueda();
+        }
+        return datos;
+    }
+    
+    private String convertirCadena(String texto){
+        String palabraSinAcentos = Normalizer.normalize(texto.toLowerCase(), 
+                Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        return palabraSinAcentos;
+ 
+    }
     
     private int getIndiceLibro(String libro){
         if (libro!=null){
@@ -171,151 +347,4 @@ public class ControladorBusqueda {
         }
         return -1;
     }
-    
-     /**
-     * Procesa el evento generado para borrar un libro de la lista
-     * Debe haber un libro seleccionado
-     */
-    public void procesarEventoBorrar(){
-         int indice=getIndiceLibro(miVista.getLibro());
-
-        if (indice!=-1){ // Si hay un elemento seleccionado
-            String titulo=miModelo.borraLibro(indice);
-            ReferenciaLibro[] listaLibros = new ReferenciaLibro[miModelo.getListaLibros().size()];
-            miVista.actualizaListaLibros(miModelo.getListaLibros().toArray(listaLibros));
-            miVista.mostrarMensaje("El libro \""+ titulo +"\" se ha borrado de la lista", false);
-        }
-        else { // Si no hay ningun elemento seleccionado
-            if (miModelo.getListaLibros().isEmpty()){
-                miVista.mostrarMensaje("No hay libros en la lista", true);
-            }
-            else {
-                miVista.mostrarMensaje("Debe seleccionar un libro de la lista", true);
-            }
-        }
-    }
-    
-    public void procesarEventoOrdenar(int modoOrdenacion){
-        ArrayList<ReferenciaLibro> listaLibros = miModelo.getListaLibros();
-        
-        if (modoOrdenacion==0){
-            miVista.actualizaListaLibros(convertirArray(listaLibros));
-            miVista.mostrarMensaje("Se ha restaurado el orden de los libros", false);
-        }
-        else if (modoOrdenacion==1){ // Alfabeticamente (menor a mayor)
-            String[] datos=new String[listaLibros.size()];
-            
-            for (int i=0; i<listaLibros.size(); i++){
-                ReferenciaLibro libro = listaLibros.get(i);
-                datos[i]=libro.imprimirEnBusqueda();
-            }
-            
-            Arrays.sort(datos);
-            miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensaje("Los libros se han ordenado alfabeticamente de menor a mayor", false);
-        }
-        else if (modoOrdenacion==2){ // Alfabeticamente (mayor a menor)
-            String[] datos=new String[listaLibros.size()];
-            
-            for (int i=0; i<listaLibros.size(); i++){
-                ReferenciaLibro libro = listaLibros.get(i);
-                datos[i]=libro.imprimirEnBusqueda();
-            }
-            
-            Arrays.sort(datos);
-            Collections.reverse(Arrays.asList(datos)); 
-            miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensaje("Los libros se han ordenado alfabeticamente de mayor a menor", false);
-        }
-        else if (modoOrdenacion==3) {
-            ReferenciaLibro[] datos=convertirArray(listaLibros);
-            
-            Arrays.sort(datos);
-            miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensaje("Los libros se han ordenado segun su precio de menor a mayor", false);
-        }
-        else if (modoOrdenacion==4){
-            ReferenciaLibro[] datos=convertirArray(listaLibros);
-            
-            for (int i=0; i<listaLibros.size(); i++){
-                datos[i]=listaLibros.get(i);
-            }
-            
-            Arrays.sort(datos);
-            Collections.reverse(Arrays.asList(datos));
-            miVista.actualizaListaLibros(datos);
-            miVista.mostrarMensaje("Los libros se han ordenado segun su precio de mayor a menor", false);
-        }
-    }
-   
-    private ReferenciaLibro[] convertirArray(ArrayList<ReferenciaLibro> listaLibros){
-        ReferenciaLibro[] listaNueva = new ReferenciaLibro[listaLibros.size()];
-        return listaLibros.toArray(listaNueva);
-    }
-    
-    public void procesarEventoBuscar(){
-        int indice=miVista.getFiltrarComboBoxIndex();
-        String textoABuscar=convertirCadena(miVista.getBuscarTextField());
-        ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
-        ArrayList<ReferenciaLibro> listaBuscada=new ArrayList<>();
-        
-        if (listaLibros.isEmpty()){
-            miVista.mostrarMensaje("No hay libros en la lista", true);
-        }
-        else if (!textoABuscar.equals("")){
-            if (indice==0){
-                for (ReferenciaLibro libro : listaLibros){
-                    String titulo=convertirCadena(libro.getTitulo());
-                    String isbn=convertirCadena(libro.getISBN());
-                    
-                    if (titulo.contains(textoABuscar) || isbn.contains(textoABuscar)){
-                        listaBuscada.add(libro);
-                    }
-                }
-            }
-            else if (indice==1) {
-                for (ReferenciaLibro libro : listaLibros){
-                    String titulo=convertirCadena(libro.getTitulo());
-                    
-                    if (titulo.contains(textoABuscar)){
-                        listaBuscada.add(libro);
-                    }
-                }
-            }
-            else if (indice==2) {
-                for (ReferenciaLibro libro : listaLibros){
-                    String isbn=convertirCadena(libro.getISBN());
-                    
-                    if (isbn.contains(textoABuscar)){
-                        listaBuscada.add(libro);
-                    }
-                }
-            } 
-            else {
-                miVista.mostrarMensaje("Opcion de filtrado no valida", true);
-            }
-            
-            if (listaBuscada.isEmpty()){
-                miVista.mostrarMensaje("No se ha encontrado ningun libro", true);
-            }
-            else {
-                miVista.mostrarMensaje("Se han encontrado "+ listaBuscada.size() +" coincidencias con la busqueda", false);
-            }
-            miVista.actualizaListaLibros(convertirArray(listaBuscada));
-        }
-        else {
-            miVista.mostrarMensaje("", false);
-            miVista.actualizaListaLibros(convertirArray(listaLibros));
-        }
-        
-    }
-    
-    private String convertirCadena(String texto){
-        String palabraSinAcentos = Normalizer.normalize(texto.toLowerCase(), 
-                Normalizer.Form.NFD).replaceAll("\\p{M}", "");
-        return palabraSinAcentos;
- 
-    }
-    
-    
 }

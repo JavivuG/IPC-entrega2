@@ -27,6 +27,8 @@ public class VistaBusqueda extends javax.swing.JFrame {
         initComponents();
         miControlador=new ControladorBusqueda(this);
         atajosPanel=new JOptionPane();
+        librosList.setSelectionMode(1);
+
     }
 
     /**
@@ -148,6 +150,11 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel9.add(buscarTextField);
 
         filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
+        filtrarComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                filtrarComboBoxItemStateChanged(evt);
+            }
+        });
         jPanel9.add(filtrarComboBox);
 
         ordenarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar:", "Alfabeticamente (menor a mayor)", "Alfabeticamente (mayor a menor)", "Precio (menor a mayor)", "Precio (mayor a menor)" }));
@@ -259,7 +266,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_cambiarEdicionButtonActionPerformed
 
     private void cargarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarButtonActionPerformed
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de texto", "txt");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ficheros de texto (*.txt)", "txt");
         seleccionFichero.setFileFilter(filter);
         int result = seleccionFichero.showOpenDialog(this);
         
@@ -302,7 +309,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
     private void ordenarComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ordenarComboBoxItemStateChanged
         if (evt.getSource() == ordenarComboBox){
-            miControlador.procesarEventoOrdenar(ordenarComboBox.getSelectedIndex());
+            miControlador.cambioOrdenMensaje();
         }
     }//GEN-LAST:event_ordenarComboBoxItemStateChanged
 
@@ -312,6 +319,10 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
         return null;
         
+    }
+    
+    public int getOrdenarComboBoxIndex(){
+        return ordenarComboBox.getSelectedIndex();
     }
     
     
@@ -349,6 +360,12 @@ public class VistaBusqueda extends javax.swing.JFrame {
             KeyboardFocusManager.getCurrentKeyboardFocusManager().clearFocusOwner();
         }
     }//GEN-LAST:event_buscarTextFieldKeyReleased
+
+    private void filtrarComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrarComboBoxItemStateChanged
+        if (evt.getSource() == filtrarComboBox){
+            miControlador.procesarEventoBuscar();
+        }
+    }//GEN-LAST:event_filtrarComboBoxItemStateChanged
     
     public int getIndiceListaSeleccionado(){
         return librosList.getSelectedIndex();
@@ -379,6 +396,10 @@ public class VistaBusqueda extends javax.swing.JFrame {
     
     public String getBuscarTextField(){
         return buscarTextField.getText();
+    }
+    
+    public boolean isBuscarTextFieldFocused(){
+        return buscarTextField.hasFocus() || buscarTextField.getForeground().equals(Color.black);
     }
     
 

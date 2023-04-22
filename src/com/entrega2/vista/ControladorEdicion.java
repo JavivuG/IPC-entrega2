@@ -137,9 +137,9 @@ public class ControladorEdicion {
     public void procesarEventoBorrar(){
         int indice=miVista.elementoListaSeleccionado();
         if (indice!=-1){ // Si hay un elemento seleccionado
-            String titulo=miModelo.borraLibro(indice);
+            ReferenciaLibro libroBorrado=miModelo.borraLibro(indice);
             miVista.actualizaListaLibros(miModelo.getListaLibros());
-            miVista.mostrarMensaje("El libro \""+ titulo +"\" se ha borrado de la lista", false);
+            miVista.mostrarMensaje("El libro \""+ libroBorrado.getTitulo() +"\" se ha borrado de la lista", false);
         }
         else { // Si no hay ningun elemento seleccionado
             if (miModelo.getListaLibros().isEmpty()){

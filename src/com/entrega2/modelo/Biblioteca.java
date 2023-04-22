@@ -13,12 +13,14 @@ import java.util.ArrayList;
  */
 public class Biblioteca {
     private ArrayList<ReferenciaLibro> listaLibros;
+    private ArrayList<ReferenciaLibro> listaLibrosBuscada;
     
     /**
      * Constructor del modelo de la aplicación
      */
     public Biblioteca(){
         listaLibros=new ArrayList<>();
+        listaLibrosBuscada=new ArrayList<>();
     }
     
     /**
@@ -91,10 +93,18 @@ public class Biblioteca {
      * Borra el libro que esta en la posición indice
      * @param indice Posición del libro que se desea borrar
      */
-    public String borraLibro(int indice){
-        String titulo=listaLibros.get(indice).getTitulo();
+    public ReferenciaLibro borraLibro(int indice){
+        ReferenciaLibro libro=listaLibros.get(indice);
         listaLibros.remove(indice);
-        return titulo;
+        return libro;
+    }
+    
+    public void borraLibroBusqueda(ReferenciaLibro libro){
+        for (int i =0; i<listaLibrosBuscada.size(); i++){
+            if (listaLibrosBuscada.get(i).equals(libro)){
+                listaLibrosBuscada.remove(i);
+            }
+        }
     }
     
     public double getPrecioMedio(){
@@ -116,6 +126,14 @@ public class Biblioteca {
             }
         }
         return contadorLibrosLeidos;
+    }
+    
+    public void setListaLibrosBuscada(ArrayList<ReferenciaLibro> lista){
+        this.listaLibrosBuscada=lista;
+    }
+    
+    public ArrayList<ReferenciaLibro> getListaLibrosBuscada(){
+        return listaLibrosBuscada;
     }
     
 
