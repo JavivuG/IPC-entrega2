@@ -25,7 +25,7 @@ public class GestorVistas {
         }
         vistaActual = new VistaInicial();
         vistaActual.setLocationRelativeTo(null);
-        vistaActual.setMinimumSize(new Dimension(341,235)); // Cambio tamaño minimo de la vista
+        vistaActual.setMinimumSize(new Dimension(370,235)); // Cambio tamaño minimo de la vista
         vistaActual.setVisible(true);
     }
     

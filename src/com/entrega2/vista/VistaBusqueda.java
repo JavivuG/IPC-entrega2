@@ -132,6 +132,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
+        buscarTextField.setForeground(new java.awt.Color(153, 153, 153));
         buscarTextField.setText("Buscar");
         buscarTextField.setToolTipText("");
         buscarTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
