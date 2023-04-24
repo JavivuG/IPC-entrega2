@@ -147,6 +147,9 @@
                   <Image iconType="3" name="/images/boligrafo.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Edici&#xf3;n manual de Biblioteca"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[210, 24]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edicionButtonActionPerformed"/>
@@ -173,7 +176,7 @@
                   <Dimension value="[221, 24]"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[221, 24]"/>
+                  <Dimension value="[210, 24]"/>
                 </Property>
               </Properties>
               <Events>
