@@ -258,6 +258,7 @@ public class ControladorBusqueda {
         
         if (listaLibros.isEmpty()){
             miVista.mostrarMensaje("No hay libros en la lista", true);
+            miVista.setFiltrarComboBoxIndex();
         }
         else if (!textoABuscar.equals("") && miVista.isBuscarTextFieldFocused()){
             switch (indiceFiltrado) {

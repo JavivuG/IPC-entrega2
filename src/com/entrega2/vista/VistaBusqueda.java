@@ -373,6 +373,10 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filtrarComboBoxItemStateChanged
     
+    public void setFiltrarComboBoxIndex(){
+        filtrarComboBox.getModel().setSelectedItem("Filtrar por: ");
+    }
+    
     public int getIndiceListaSeleccionado(){
         return librosList.getSelectedIndex();
     }
