@@ -84,7 +84,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
-        atajosButton.setText("Atajos");
+        atajosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         atajosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 atajosButtonActionPerformed(evt);
@@ -96,6 +96,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
+        volverButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/regreso.png"))); // NOI18N
         volverButton.setText("Volver");
         volverButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +105,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         });
         jPanel11.add(volverButton);
 
+        cambiarEdicionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/boligrafo.png"))); // NOI18N
         cambiarEdicionButton.setText("Edición");
         cambiarEdicionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +152,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         jPanel9.add(buscarTextField);
 
         filtrarComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por:", "Título", "ISBN" }));
+        filtrarComboBox.setPreferredSize(new java.awt.Dimension(125, 24));
         filtrarComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 filtrarComboBoxItemStateChanged(evt);
@@ -203,6 +206,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
+        cargarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/importar.png"))); // NOI18N
         cargarButton.setText("Cargar libros");
         cargarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +215,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         });
         jPanel12.add(cargarButton);
 
+        exportarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exportar.png"))); // NOI18N
         exportarButton.setText("Exportar libros");
         exportarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +228,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
 
         jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
+        editarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/editar.png"))); // NOI18N
         editarButton.setText("Editar libro");
         editarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

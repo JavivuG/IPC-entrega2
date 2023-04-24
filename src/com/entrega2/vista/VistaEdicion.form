@@ -55,7 +55,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="atajosButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Atajos"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/informacion.png"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atajosButtonActionPerformed"/>
@@ -77,6 +79,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="volverButton">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/regreso.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Volver"/>
               </Properties>
               <Events>
@@ -85,6 +90,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="buscarButton">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/buscar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
               <Events>
@@ -275,6 +283,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="guardarButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/images/salvar.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Guardar"/>
                           </Properties>
                           <Events>
@@ -292,6 +303,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="editarButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/images/editar.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Editar"/>
                           </Properties>
                           <Events>
@@ -310,6 +324,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="borrarButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/images/borrar.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Borrar"/>
                           </Properties>
                           <Events>

@@ -143,6 +143,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="edicionButton">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/boligrafo.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Edici&#xf3;n manual de Biblioteca"/>
               </Properties>
               <Events>
@@ -159,6 +162,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="busquedaButton">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/buscar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="B&#xfa;squeda de libros"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[221, 24]"/>

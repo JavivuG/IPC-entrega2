@@ -97,6 +97,7 @@ public class VistaInicial extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
+        edicionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/boligrafo.png"))); // NOI18N
         edicionButton.setText("Edición manual de Biblioteca");
         edicionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +110,7 @@ public class VistaInicial extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
+        busquedaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buscar.png"))); // NOI18N
         busquedaButton.setText("Búsqueda de libros");
         busquedaButton.setMaximumSize(new java.awt.Dimension(221, 24));
         busquedaButton.setMinimumSize(new java.awt.Dimension(221, 24));
