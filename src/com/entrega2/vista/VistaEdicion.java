@@ -26,9 +26,6 @@ public class VistaEdicion extends javax.swing.JFrame {
         initComponents();
         miControlador=new ControladorEdicion(this);
         atajosPanel = new JOptionPane();
-        // Hago que no pueda poner numeros negativos en ninguno de los spinner
-        ((SpinnerNumberModel) unidadesSpinner.getModel()).setMinimum(0);
-        ((SpinnerNumberModel) decimalesSpinner.getModel()).setMinimum(0);
 
         librosList.setSelectionMode(1);
     }
@@ -315,6 +312,12 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel35.setLayout(new java.awt.GridLayout(1, 2));
 
         jPanel10.setLayout(new java.awt.GridLayout(1, 0));
+
+        unidadesSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                unidadesSpinnerStateChanged(evt);
+            }
+        });
         jPanel10.add(unidadesSpinner);
 
         jPanel35.add(jPanel10);
@@ -515,6 +518,10 @@ public class VistaEdicion extends javax.swing.JFrame {
         miControlador.comprobarDecimalesSpinner();
     }//GEN-LAST:event_decimalesSpinnerStateChanged
 
+    private void unidadesSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_unidadesSpinnerStateChanged
+        miControlador.comprobarUnidadesSpinner();
+    }//GEN-LAST:event_unidadesSpinnerStateChanged
+
     /**
      * Cambia el valor de los decimales de decimalesSpinner
      * @param numero Valor para el spinner de decimales
@@ -522,6 +529,15 @@ public class VistaEdicion extends javax.swing.JFrame {
     public void setDecimalesSpinner(int numero){
         decimalesSpinner.setValue(numero);
     }
+    
+    /**
+     * Cambia el valor de las unidades de unidadesSpinner
+     * @param numero Valor para el spinner de unidades
+     */
+    public void setUnidadesSpinner(int numero){
+        unidadesSpinner.setValue(numero);
+    }
+    
     /**
      * Selecciona o deja de seleccionar elementos de una lista
      * Selecciona un elemento si se pulsa un tecla entre 1 y 9 

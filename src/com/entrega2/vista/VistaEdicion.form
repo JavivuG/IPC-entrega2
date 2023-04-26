@@ -467,6 +467,9 @@
                               </Layout>
                               <SubComponents>
                                 <Component class="javax.swing.JSpinner" name="unidadesSpinner">
+                                  <Events>
+                                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="unidadesSpinnerStateChanged"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>

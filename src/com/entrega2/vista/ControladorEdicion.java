@@ -157,13 +157,30 @@ public class ControladorEdicion {
     }
     
     /**
-     * Comprueba que los decimales del spinner son mayores que 99 y si lo es muestro mensaje de error y actualizo su valor a 99
+     * Comprueba que los decimales del spinner:
+     * Son mayores que 99 y si lo es muestro mensaje de error y actualizo su valor a 99
+     * Son menores de 0 y si lo es muestro mensaje de error y actualizo su valor a 0
      */
     public void comprobarDecimalesSpinner(){
         int numeroDecimales=miVista.getDecimalesLibro();
         if (numeroDecimales>99){
             miVista.mostrarMensaje("Los decimales del precio deben ser entre 0 y 99.", true);
             miVista.setDecimalesSpinner(99);
+        }
+        else if (numeroDecimales<0){
+            miVista.mostrarMensaje("Los decimales del precio deben ser entre 0 y 99.", true);
+            miVista.setDecimalesSpinner(0);
+        }
+    }
+    
+    /**
+     * Comprueba que las unidades son menores de 0 y si lo es muestro mensaje de error y actualizo su valor a 0
+     */
+    public void comprobarUnidadesSpinner(){
+        int numeroUnidades=miVista.getUnidadesLibro();
+        if (numeroUnidades<0){
+            miVista.mostrarMensaje("Las unidades del precio deben ser mayores o iguales que 0.", true);
+            miVista.setUnidadesSpinner(0);
         }
     }
     
