@@ -26,7 +26,7 @@ public class Biblioteca {
     /**
      * Añade un libro a la lista
      * @param libro Libro que se desea añadir
-     * @returns -1 si el libro ya existe en la lista
+     * @return -1 si el libro ya existe en la lista
      */
     public boolean addLibro(ReferenciaLibro libro){
        if (libroYaExiste(libro)){
@@ -80,6 +80,7 @@ public class Biblioteca {
      * Reemplaza un libro dado en el indice dado
      * @param libro Libro nuevo que se quiere introducir
      * @param indice Indice en el que se quiere introducir el nuevo libro
+     * @return true si se ha reemplazado el libro, false si el libro ya existia y por tanto, no se ha reemplazado
      */
     public boolean reemplazarLibro(ReferenciaLibro libro, int indice){
         if (libroYaExiste(libro, indice)){
@@ -92,6 +93,7 @@ public class Biblioteca {
     /**
      * Borra el libro que esta en la posición indice
      * @param indice Posición del libro que se desea borrar
+     * @return Libro que se ha borrado de la lista de libros
      */
     public ReferenciaLibro borraLibro(int indice){
         ReferenciaLibro libro=listaLibros.get(indice);
@@ -99,6 +101,10 @@ public class Biblioteca {
         return libro;
     }
     
+    /**
+     * Borra un libro de la lista de busqueda
+     * @param libro Libro que se desea eliminar de la lista Buscada
+     */
     public void borraLibroBusqueda(ReferenciaLibro libro){
         for (int i =0; i<listaLibrosBuscada.size(); i++){
             if (listaLibrosBuscada.get(i).equals(libro)){
@@ -107,6 +113,10 @@ public class Biblioteca {
         }
     }
     
+    /**
+     * Devuelve el precio medio de los libros de la biblioteca
+     * @return Precio medio de los libros de la biblioteca
+     */
     public double getPrecioMedio(){
         double sumaPrecio=0;
         if (listaLibros.size()>0){
@@ -118,6 +128,10 @@ public class Biblioteca {
         return 0;
     }
     
+    /**
+     * Devuelve la cantidad de libros leido
+     * @return Cantidad de libros leidos
+     */
     public int getCantidadLibrosLeidos(){
         int contadorLibrosLeidos=0;
         for (int i=0; i<listaLibros.size(); i++){
@@ -128,10 +142,18 @@ public class Biblioteca {
         return contadorLibrosLeidos;
     }
     
+    /**
+     * Establece la lista Buscada con los libros que coincidan con la busqueda correspondiente
+     * @param lista Lista Buscada
+     */
     public void setListaLibrosBuscada(ArrayList<ReferenciaLibro> lista){
         this.listaLibrosBuscada=lista;
     }
     
+    /**
+     * Devuelve la lista de libros buscado
+     * @return Lista de libros buscados
+     */
     public ArrayList<ReferenciaLibro> getListaLibrosBuscada(){
         return listaLibrosBuscada;
     }

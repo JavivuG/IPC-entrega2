@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
+ * Clase que representa la vista de Busqueda
  * @author javivu
  * @author mgonzal
  */
@@ -28,7 +28,6 @@ public class VistaBusqueda extends javax.swing.JFrame {
         miControlador=new ControladorBusqueda(this);
         atajosPanel=new JOptionPane();
         librosList.setSelectionMode(1);
-
     }
 
     /**
@@ -286,6 +285,9 @@ public class VistaBusqueda extends javax.swing.JFrame {
         miControlador.isBibliotecaVacia();
     }//GEN-LAST:event_exportarButtonActionPerformed
 
+    /**
+     * Muestra la ventana de exportar los libros
+     */
     public void abreVentanaExportar(){
         int result = exportarLibros.showSaveDialog(this);
         if (result == JFileChooser.APPROVE_OPTION){
@@ -297,29 +299,37 @@ public class VistaBusqueda extends javax.swing.JFrame {
         miControlador.procesarEventoEditar();
     }//GEN-LAST:event_editarButtonActionPerformed
 
+    // Atajo para editar un libro
     private void librosListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librosListMouseClicked
         if (evt.getClickCount() == 2){
             miControlador.procesarEventoEditar();
         }
     }//GEN-LAST:event_librosListMouseClicked
 
+    // Atajos correspondientes a la lista de libros
     private void librosListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_librosListKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_DELETE){
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE){ // Si se pulsa <SUPR> entonces borro el libro seleccionado
             miControlador.procesarEventoBorrar();
         }
-        else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) { // Si se pulsa <ESC> entonces dejo de seleccionar
             if (librosList.getSelectedIndex()!=-1){ // Si hay seleccionado un elemento
                 librosList.clearSelection();
             }
         }
     }//GEN-LAST:event_librosListKeyPressed
 
+    // Si cambia el estado de ordenarComboBox muestro un mensaje
     private void ordenarComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ordenarComboBoxItemStateChanged
         if (evt.getSource() == ordenarComboBox){
             miControlador.cambioOrdenMensaje();
         }
     }//GEN-LAST:event_ordenarComboBoxItemStateChanged
 
+    /**
+     * Devuelve el libro en el indice seleccionado
+     * Null si no se ha seleccionado ningun libro
+     * @return String correspondiente al libro seleccionado en la lista
+     */
     public String getLibro(){
         if (librosList.getSelectedIndex()!=-1){
              return librosList.getModel().getElementAt(librosList.getSelectedIndex());
@@ -328,15 +338,23 @@ public class VistaBusqueda extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Devuelve el indice del elemento seleccionado en el comboBox de ordenar
+     * @return Indice de elemento seleccionado en ordenarComboBox
+     */
     public int getOrdenarComboBoxIndex(){
         return ordenarComboBox.getSelectedIndex();
     }
     
-    
+    /**
+     * Devuelve el indice del elemento seleccionado en el comboBox de filtrar
+     * @return Indice de elemento seleccionado en filtrarComboBox
+     */
     public int getFiltrarComboBoxIndex(){
         return filtrarComboBox.getSelectedIndex();
     }
     
+    // Muestra los atajos existentes en el sistema con un dialogo emergente
     private void atajosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atajosButtonActionPerformed
         String[] mensajes={"<ESC> Dejar de seleccionar un libro", 
             "<SUPR> Borra el libro seleccionado en la lista",
@@ -345,6 +363,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         atajosPanel.showMessageDialog(this,mensajes, "Atajos", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_atajosButtonActionPerformed
 
+    // Si tiene el focus el campo de busqueda entonces quito el texto predefinido
     private void buscarTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTextFieldFocusGained
         if (buscarTextField.getText().equals("Buscar")) {
             buscarTextField.setText("");
@@ -352,6 +371,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarTextFieldFocusGained
 
+    // Si no tiene el focus el campo de busqueda entonces muestro "Buscar" como texto predefinido
     private void buscarTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarTextFieldFocusLost
         if (buscarTextField.getText().equals("")) {
             buscarTextField.setForeground(Color.gray);
@@ -359,6 +379,7 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarTextFieldFocusLost
 
+    // Cada vez que se suelta una tecla en el campo de busqueda se busca libros
     private void buscarTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarTextFieldKeyReleased
         if ((evt.getKeyCode() >= 32 && evt.getKeyCode()<=127) || evt.getKeyCode() == 8){
             miControlador.procesarEventoBuscar();
@@ -368,20 +389,35 @@ public class VistaBusqueda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarTextFieldKeyReleased
 
+    // Si se cambia el estado de filtrarComboBox vuelvo a buscar
     private void filtrarComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtrarComboBoxItemStateChanged
         if (evt.getSource() == filtrarComboBox){
             miControlador.procesarEventoBuscar();
         }
     }//GEN-LAST:event_filtrarComboBoxItemStateChanged
     
+    /**
+     * Establece el valor predeterminado para el comboBox de filtrar
+     */
     public void setFiltrarComboBoxIndex(){
         filtrarComboBox.getModel().setSelectedItem("Filtrar por: ");
     }
     
+    /**
+     * Devuelve el indice del elemento de la lista seleccionado
+     * @return Indice del elemento/libro de la lista seleccionado
+     */
     public int getIndiceListaSeleccionado(){
         return librosList.getSelectedIndex();
     }
     
+    /**
+     * Muestra un mensaje al usuario. 
+     * Rojo si es un mensaje de error, 
+     * Verde si informa de cambios en la vista sin errores
+     * @param mensaje Mensaje que se muestra al usuario
+     * @param error 1 si es un mensaje de error, 0 de lo contrario
+     */
     public void mostrarMensaje(String mensaje, boolean error){
         if (error){
             mensajeLabel.setForeground(Color.red);
@@ -391,10 +427,18 @@ public class VistaBusqueda extends javax.swing.JFrame {
         mensajeLabel.setText(mensaje); 
     }
 
+    /**
+     * Actualiza la lista de libros mostrada en el JList de la vista
+     * @param listaLibros Nueva lista que se desea mostrar. 
+     */
     public void actualizaListaLibros(String[] listaLibros){
         librosList.setListData(listaLibros); 
     }
     
+    /**
+     * Actualiza la lista de libros mostrada en el JList de la vista
+     * @param listaLibros Nueva lista que se desea mostrar. En ReferenciaLibro[]
+     */
     public void actualizaListaLibros(ReferenciaLibro[] listaLibros){
         String[] lista=new String[listaLibros.length];
         for (int i=0; i<listaLibros.length; i++){
@@ -405,15 +449,21 @@ public class VistaBusqueda extends javax.swing.JFrame {
         librosList.setListData(lista); 
     }
     
+    /**
+     * Devuelve el texto que esta en buscarTextField
+     * @return texto que esta en el campo de busqueda
+     */
     public String getBuscarTextField(){
         return buscarTextField.getText();
     }
     
+    /**
+     * Comprueba que el campo de busqueda tenga el focus
+     * @return True si tiene el focus, false de lo contrario
+     */
     public boolean isBuscarTextFieldFocused(){
         return buscarTextField.hasFocus() || buscarTextField.getForeground().equals(Color.black);
     }
-    
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atajosButton;

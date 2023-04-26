@@ -39,6 +39,15 @@ public class ReferenciaLibro implements Comparable<ReferenciaLibro>{
 
     }
     
+    /**
+     * Constructor de referenciaLibro indicando directamente el precio
+     * @param titulo Titulo del libro
+     * @param descripcion Descripcion de un libro
+     * @param isbn ISBN de un libro. No se puede modificar despues de inicializar el libro
+     * @param estado Estado  de un libro. Puede ser Malo, Regular o Bueno
+     * @param precio Precio de un libro
+     * @param leido Si el libro se ha leido o no
+     */
     public ReferenciaLibro(String titulo, String descripcion, String isbn, String estado, double precio, boolean leido){
         if (compruebaLibro(titulo, isbn)==0){
             this.isbn = isbn;
@@ -133,17 +142,23 @@ public class ReferenciaLibro implements Comparable<ReferenciaLibro>{
         this.descripcion = descripcion;
     }
     
-
-    
+    /**
+     * Establece el precio para el libro
+     * @param precio Precio del libro
+     */
     public void setPrecio(double precio){
         this.precio=precio;
     }
     
+    /**
+     * Establece el precio para el libro indicando las unidades y decimales del precio
+     * @param unidades Unidades del precio del libro. Ejemplo: si el precio es 14.60 unidades será 14
+     * @param decimales Decimales del precio del libro. Ejemplo: si el precio es 14.60 decimales será 60
+     */
     public void setPrecio(int unidades, int decimales){
         String precio=unidades+"."+decimales;
         this.precio = Double.parseDouble(precio);
     }
-    
     
     /**
      * Proporciona un nuevo estado para el libro
@@ -206,10 +221,19 @@ public class ReferenciaLibro implements Comparable<ReferenciaLibro>{
         }
     }
     
+    /**
+     * Devuelve el string para mostrar el libro en la lista de Busqueda
+     * @return String que se muestra en la lista de Busqueda
+     */
     public String imprimirEnBusqueda(){
         return  "Titulo: "+ getTitulo() +" ISBN: "+ getISBN() + " Precio: "+ getPrecio();
     }
     
+    /**
+     * Compara un libro con otro segun el precio
+     * @param otroLibro Libro con el que se quiere comparar 
+     * @return Valor entero que indica si el objeto actual es menor, igual o mayor que el libro con el que se está comparando.
+     */
     @Override
     public int compareTo(ReferenciaLibro otroLibro) {
         return Double.compare(this.precio, otroLibro.getPrecio());

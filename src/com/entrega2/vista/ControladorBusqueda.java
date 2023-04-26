@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- *
+ * Clase que representa el controlador de la vista de Busqueda de libros
  * @author javivu
  * @author mgonzal
  */
@@ -40,14 +40,25 @@ public class ControladorBusqueda {
         }
     }
     
+    /**
+     * Cambia a la vista Inicial
+     */
     public void procesarRedirrecionInicial(){
         Main.getGestorVistas().mostrarVistaInicial();
     }
     
+    /**
+     * Cambia a la vista de Edicion
+     */
     public void procesarRedirrecionEdicion(){
         Main.getGestorVistas().mostrarVistaEdicion(null);
     }
     
+    /**
+     * Lee los libros existentes de un fichero del sistema e importa los correctos en la biblioteca
+     * Es posible que el fichero no sea correcto (No cumpla con el formato indicado)
+     * @param ficheroImportar fichero que contiene los libros que se van a importar
+     */
     public void procesarEventoCargar(File ficheroImportar){
         try (BufferedReader reader = new BufferedReader(new FileReader(ficheroImportar))) {
             int contadorLibros=0, contadorLineas=0;
@@ -87,7 +98,7 @@ public class ControladorBusqueda {
                 }
                 contadorLineas++;
             }
-            if (contadorLibros>0){
+            if (contadorLibros>0){ // Si se han añadido libros entonces lo ordeno
                 procesarEventoOrdenar(miVista.getOrdenarComboBoxIndex());
                 miVista.mostrarMensaje("Se han añadido "+ contadorLibros+" libros de "+ contadorLineas+ " entradas del fichero", false);
             }
@@ -106,6 +117,10 @@ public class ControladorBusqueda {
         }
     }
     
+    /**
+     * Comprueba que la lista este o no vacia antes de abrir la ventana de exportar libros
+     * Esto se hace para evitar que se abra la ventana de exportar si no hay libros en la biblioteca
+     */
     public void isBibliotecaVacia(){
         if( miModelo.getListaLibros().isEmpty()){
             miVista.mostrarMensaje("No hay libros en la lista", true);
@@ -115,6 +130,11 @@ public class ControladorBusqueda {
         }
     }
     
+    /**
+     * Exporta los libros existentes en la biblioteca a un fichero .txt
+     * El fichero exportado tiene el mismo formato que cuando se importan 
+     * @param fichero Fichero al que se exportan los libros de la biblioteca
+     */
     public void procesarEventoExportar(File fichero){
         if (miModelo.getListaLibros().isEmpty()){
             miVista.mostrarMensaje("No hay libros en la lista", true);
@@ -139,6 +159,9 @@ public class ControladorBusqueda {
 
     }
     
+    /**
+     * Cambia a la vista de Edicion con el libro seleccionado cargado para editarlo
+     */
     public void procesarEventoEditar(){
         int indice=getIndiceLibro(miVista.getLibro());
         if (indice!=-1){
@@ -177,6 +200,9 @@ public class ControladorBusqueda {
         }
     }
     
+    /**
+     * Muestra un mensaje cuando el estado del ordenarComboBox cambia informando del cambio
+     */
     public void cambioOrdenMensaje(){
         int modoOrdenacion=miVista.getOrdenarComboBoxIndex();
         switch (modoOrdenacion) {
@@ -201,11 +227,16 @@ public class ControladorBusqueda {
         procesarEventoOrdenar(modoOrdenacion);
     }
     
+    /**
+     * Ordena los libros que se muestran en la lista de busqueda segun indique el ordenarComboBox
+     * @param modoOrdenacion Modos de ordenacion para los libros de la lista puede ser: 0,1,2,3 o 4 
+     */
     public void procesarEventoOrdenar(int modoOrdenacion){
         ArrayList<ReferenciaLibro> listaLibros;           
         String[] datos;
         ReferenciaLibro[] datosLibros;
        
+        // Saber si se esta ante una busqueda o se esta mostrando la lista completa de todos los libros
         if (!miVista.getBuscarTextField().equals("") && miVista.isBuscarTextFieldFocused()){
             listaLibros=miModelo.getListaLibrosBuscada();
         }
@@ -214,29 +245,29 @@ public class ControladorBusqueda {
         }
         
         switch (modoOrdenacion) {
-            case 0:
+            case 0: // Orden predefinido
                 miVista.actualizaListaLibros(convertirArray(listaLibros));
                 break;
-            case 1:            
+            case 1: // Orden alfabeticamente (menor a mayor)        
                 datos=convertirArrayStrings(listaLibros);
 
                 Arrays.sort(datos);
                 miVista.actualizaListaLibros(datos);
                 break;
-            case 2:
+            case 2: // Orden alfabeticamente (mayor a menor)
                 datos=convertirArrayStrings(listaLibros);
 
                 Arrays.sort(datos);
                 Collections.reverse(Arrays.asList(datos)); 
                 miVista.actualizaListaLibros(datos);
                 break;
-            case 3:
+            case 3: // Orden segun precios (menor a mayor)
                 datosLibros=convertirArray(listaLibros);
                 
-                Arrays.sort(datosLibros);
+                Arrays.sort(datosLibros); // Usa metodo compare de ReferenciaLibro
                 miVista.actualizaListaLibros(datosLibros);
                 break;
-            case 4:
+            case 4: // Orden segun precios (mayor a menor)
                 datosLibros=convertirArray(listaLibros);
                 
                 Arrays.sort(datosLibros);
@@ -248,10 +279,17 @@ public class ControladorBusqueda {
         }
     }
     
+    /**
+     * Busca libros en la lista de libros de la vista de Busqueda
+     */
     public void procesarEventoBuscar(){
-        int indiceFiltrado=miVista.getFiltrarComboBoxIndex();
+        // Si indiceFiltrado==0 se buscara tanto en el ISBN como el titulo
+        // Se buscara solo entre los titulos si indiceFiltrado==1,
+        // Se buscara solo entre los ISBN de los libros si indiceFiltrado==2
+        int indiceFiltrado=miVista.getFiltrarComboBoxIndex(); 
         boolean error=false;
         
+        // Se convierte el texto a buscar para que ignore tildes, ñ, etc
         String textoABuscar=convertirCadena(miVista.getBuscarTextField());
         ArrayList<ReferenciaLibro> listaLibros=miModelo.getListaLibros();
         ArrayList<ReferenciaLibro> listaBuscada=new ArrayList<>();
@@ -316,11 +354,13 @@ public class ControladorBusqueda {
         
     }
     
+    // Convierte un ArrayList<ReferenciaLibro> a ReferenciaLibro[]
     private ReferenciaLibro[] convertirArray(ArrayList<ReferenciaLibro> listaLibros){
         ReferenciaLibro[] listaNueva = new ReferenciaLibro[listaLibros.size()];
         return listaLibros.toArray(listaNueva);
     }
     
+    // Convierte ArrayList<ReferenciaLibro> a String[]
     private String[] convertirArrayStrings(ArrayList<ReferenciaLibro> listaLibros){
         String[] datos=new String[listaLibros.size()];
         for (int i=0; i<listaLibros.size(); i++){
@@ -330,6 +370,7 @@ public class ControladorBusqueda {
         return datos;
     }
     
+    // Ignora los tildes, ñ, mayusculas. (Se usa para que la busqueda sea más permisiva)
     private String convertirCadena(String texto){
         String palabraSinAcentos = Normalizer.normalize(texto.toLowerCase(), 
                 Normalizer.Form.NFD).replaceAll("\\p{M}", "");
@@ -337,6 +378,7 @@ public class ControladorBusqueda {
  
     }
     
+    // Busca el indice real de un libro en el modelo
     private int getIndiceLibro(String libro){
         if (libro!=null){
             for (int i=0;i<miModelo.getListaLibros().size(); i++){

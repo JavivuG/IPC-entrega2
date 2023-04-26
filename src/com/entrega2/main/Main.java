@@ -8,8 +8,9 @@ import com.entrega2.modelo.Biblioteca;
 import com.entrega2.vista.GestorVistas;
 
 /**
- *
+ * Clase que representa el metodo Main para inicializar la aplicacion
  * @author jagarci
+ * @author mgonzal
  */
 public class Main {
     private static GestorVistas gestor;
@@ -50,13 +51,17 @@ public class Main {
     }
 
     /**
-     * 
-     * @return 
+     * Devuelve el gestor de vistas para cambiar entre las vistas de la aplicacion
+     * @return Gestor de vista 
      */
     public static GestorVistas getGestorVistas() {
         return gestor;
     }
     
+    /**
+     * Devuelve la biblioteca 
+     * @return Biblioteca
+     */
     public static Biblioteca getBiblioteca(){
         return biblioteca;
     }

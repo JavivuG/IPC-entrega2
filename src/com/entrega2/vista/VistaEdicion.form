@@ -478,6 +478,9 @@
                               </Layout>
                               <SubComponents>
                                 <Component class="javax.swing.JSpinner" name="decimalesSpinner">
+                                  <Events>
+                                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="decimalesSpinnerStateChanged"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>

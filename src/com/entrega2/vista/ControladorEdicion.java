@@ -121,6 +121,11 @@ public class ControladorEdicion {
         }
     }
     
+    /**
+     * Devuelve el indice de un libro en la lista de libros del modelo
+     * @param libro Que se quiere buscar en la lista
+     * @return indice del libro, -1 si no esta en la lista de libros
+     */
     public int seleccionaLibro(ReferenciaLibro libro){
         for (int i=0; i<miModelo.getListaLibros().size(); i++){
             if (libro.equals(miModelo.getListaLibros().get(i))){
@@ -151,10 +156,27 @@ public class ControladorEdicion {
         }
     }
     
+    /**
+     * Comprueba que los decimales del spinner son mayores que 99 y si lo es muestro mensaje de error y actualizo su valor a 99
+     */
+    public void comprobarDecimalesSpinner(){
+        int numeroDecimales=miVista.getDecimalesLibro();
+        if (numeroDecimales>99){
+            miVista.mostrarMensaje("Los decimales del precio deben ser entre 0 y 99.", true);
+            miVista.setDecimalesSpinner(99);
+        }
+    }
+    
+    /**
+     * Cambio a la vista Inicial
+     */
     public void procesarRedirrecionInicial(){
         Main.getGestorVistas().mostrarVistaInicial();
     }
          
+    /**
+     * Cambio a la vista de Busqueda
+     */
     public void procesarRedirrecionBusqueda(){
         Main.getGestorVistas().mostrarVistaBusqueda();
     }

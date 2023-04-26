@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 
 /**
- *
+ * Clase que representa la vista de Edicion de la aplicación
  * @author jagarci
  * @author mgonzal
  */
@@ -29,7 +29,6 @@ public class VistaEdicion extends javax.swing.JFrame {
         // Hago que no pueda poner numeros negativos en ninguno de los spinner
         ((SpinnerNumberModel) unidadesSpinner.getModel()).setMinimum(0);
         ((SpinnerNumberModel) decimalesSpinner.getModel()).setMinimum(0);
-        ((SpinnerNumberModel) decimalesSpinner.getModel()).setMaximum(99);
 
         librosList.setSelectionMode(1);
     }
@@ -321,6 +320,12 @@ public class VistaEdicion extends javax.swing.JFrame {
         jPanel35.add(jPanel10);
 
         jPanel8.setLayout(new java.awt.GridLayout(1, 0));
+
+        decimalesSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                decimalesSpinnerStateChanged(evt);
+            }
+        });
         jPanel8.add(decimalesSpinner);
 
         jPanel35.add(jPanel8);
@@ -492,20 +497,31 @@ public class VistaEdicion extends javax.swing.JFrame {
     }//GEN-LAST:event_descripcionTextAreaKeyPressed
 
     private void librosListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librosListMouseClicked
-        if (evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2){ // Comprueba que se ha clickado 2 veces el boton
             this.miControlador.procesarEventoEditar();
         }
     }//GEN-LAST:event_librosListMouseClicked
 
     private void atajosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atajosButtonActionPerformed
-        String[] mensajes={"<ESC> Dejar de seleccionar un libro", 
+        String[] mensajesAtajos={"<ESC> Dejar de seleccionar un libro", 
             "<SUPR> Borra el libro seleccionado en la lista",
             "<ENTER> Pulsar un boton", 
             "<ALT+[1..9]> Mientras se selecciona boton de editar o borrar para seleccionar libro de la lista",
             "<Doble click> En un libro de la lista para editarlo"};
-        atajosPanel.showMessageDialog(this,mensajes, "Atajos", JOptionPane.INFORMATION_MESSAGE);
+        atajosPanel.showMessageDialog(this,mensajesAtajos, "Atajos", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_atajosButtonActionPerformed
 
+    private void decimalesSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_decimalesSpinnerStateChanged
+        miControlador.comprobarDecimalesSpinner();
+    }//GEN-LAST:event_decimalesSpinnerStateChanged
+
+    /**
+     * Cambia el valor de los decimales de decimalesSpinner
+     * @param numero Valor para el spinner de decimales
+     */
+    public void setDecimalesSpinner(int numero){
+        decimalesSpinner.setValue(numero);
+    }
     /**
      * Selecciona o deja de seleccionar elementos de una lista
      * Selecciona un elemento si se pulsa un tecla entre 1 y 9 
@@ -523,7 +539,14 @@ public class VistaEdicion extends javax.swing.JFrame {
             }
         }
     }
-    
+   
+    /**
+     * Muestra un mensaje al usuario. 
+     * Rojo si es un mensaje de error, 
+     * Verde si informa de cambios en la vista sin errores
+     * @param mensaje Mensaje que se muestra al usuario
+     * @param error 1 si es un mensaje de error, 0 de lo contrario
+     */
    public void mostrarMensaje(String mensaje, boolean error){
         if (error){
             mensajeLabel.setForeground(Color.red);

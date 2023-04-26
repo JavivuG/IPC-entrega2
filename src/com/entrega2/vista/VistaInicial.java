@@ -5,7 +5,7 @@
 package com.entrega2.vista;
 
 /**
- *
+ * Clase que representa la vista Inicial
  * @author javivu
  * @author mgonzal
  */
@@ -138,26 +138,50 @@ public class VistaInicial extends javax.swing.JFrame {
         this.controlador.procesarRedireccionBusqueda();
     }//GEN-LAST:event_busquedaButtonActionPerformed
 
+    /**
+     * Devuelve el precio medio
+     * @return Precio medio de los libros del modelo
+     */
     public String getPrecioMedio(){
         return precioMedioLabel.getText();
     }
     
+    /**
+     * Establece un valor para el precio medio de los libros
+     * @param precioMedio Precio medio que se establece
+     */
     public void setPrecioMedio(String precioMedio){
         precioMedioLabel.setText(precioMedio);
     }
     
+    /**
+     * Devuelve la cantidad de libros leido/no leidos
+     * @return Cantidad de libros leidos/no leidos
+     */
     public String getLibrosLeidos(){
         return leidosLabel.getText();
     }
     
+    /**
+     * Establece una cantidad de libros leidos/no leidos
+     * @param librosLeidos Cantidad de libros leidos/no leidos. Formato "leidos/ no leidos"
+     */
     public void setLibrosLeidos(String librosLeidos){
         leidosLabel.setText(librosLeidos);
     }
     
+    /**
+     * Devuelve la cantidad de libros
+     * @return Cantidad de libros
+     */
     public String getCantidadLibros(){
         return totalLibrosLabel.getText();
     }
     
+    /**
+     * Establece una cantidad de libros
+     * @param cantidadLibros Cantidad de libros que se desea establecer
+     */
     public void setCantidadLibros(String cantidadLibros){
         totalLibrosLabel.setText(cantidadLibros);
     }

@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 /**
- *
+ * Clase que representa el controlador de la vista Inicial
  * @author javivu
  * @author mgonzal
  */
@@ -28,14 +28,27 @@ public class ControladorInicial {
         setContadores();
     }
     
+    /**
+     * Redirijo a la vista de Edicion
+     */
     public void procesarRedireccionEdicion(){
         Main.getGestorVistas().mostrarVistaEdicion(null);
     }
     
+    /**
+     * Redirijo a la vista de Busqueda
+     */
     public void procesarRedireccionBusqueda(){
         Main.getGestorVistas().mostrarVistaBusqueda();
     }
     
+    /**
+     * Inicializo los contadores que se muestran en la vista con estadisticas del sistema
+     * Las estadisticas son:
+     * Cantidad de libros del sistema
+     * Precio medio de los libros
+     * Cantidad de libros leidos/no leidos
+     */
     public void setContadores(){
         miVista.setCantidadLibros(miModelo.getListaLibros().size()+"");
         
