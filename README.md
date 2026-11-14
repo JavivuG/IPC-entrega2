@@ -13,20 +13,9 @@
 
 </div>
 
-Navegación entre vistas tal como la gestiona `GestorVistas` (cada vista tiene su controlador y todas comparten el modelo `Biblioteca`):
-
-```mermaid
-flowchart LR
-    I["Vista inicial<br/>nº de libros, precio medio,<br/>leídos / no leídos"]
-    E["Vista de edición<br/>alta, edición y borrado"]
-    B["Vista de búsqueda<br/>filtro y ordenación"]
-    I --> E
-    I --> B
-    E --> I
-    E --> B
-    B --> I
-    B -- "libro seleccionado" --> E
-```
+<p align="center">
+  <img src="docs/screenshots/vista-busqueda.png" alt="Vista de búsqueda: el texto «dona» encuentra «Doña Bárbara» y «Doña Perfecta» ordenados por precio de mayor a menor" width="610">
+</p>
 
 ## En pocas palabras
 
@@ -52,6 +41,31 @@ flowchart LR
 | Diseño de software | MVC con un modelo y tres controladores |
 | Ficheros y texto | Formato `título;descripción;isbn;estado;precio;leído`, validación de entrada, normalización Unicode |
 | Herramientas | Proyecto NetBeans con Ant (`build.xml`, `nbproject/`) |
+
+## Capturas
+
+| Vista inicial | Vista de edición | Vista de búsqueda |
+| --- | --- | --- |
+| ![Vista inicial con el total de libros (7), leídos y no leídos (4/3) y el precio medio (10.96)](docs/screenshots/vista-inicial.png) | ![Vista de edición con «Pepita Jiménez» cargado en el formulario y la lista de libros a la derecha](docs/screenshots/vista-edicion.png) | ![Búsqueda de «dona» sin tilde que encuentra los dos títulos con «Doña»](docs/screenshots/vista-busqueda.png) |
+
+Capturas reales de la aplicación compilada con OpenJDK 17 (`--release 11`) y ejecutada en un servidor X virtual (Xvfb), sin gestor de ventanas, por eso no aparece la barra de título. Los siete libros son datos de ejemplo cargados en el modelo `Biblioteca` antes de abrir las vistas; la búsqueda y la ordenación son las de `ControladorBusqueda`.
+
+## Arquitectura
+
+Navegación entre vistas tal como la gestiona `GestorVistas` (cada vista tiene su controlador y todas comparten el modelo `Biblioteca`):
+
+```mermaid
+flowchart LR
+    I["Vista inicial<br/>nº de libros, precio medio,<br/>leídos / no leídos"]
+    E["Vista de edición<br/>alta, edición y borrado"]
+    B["Vista de búsqueda<br/>filtro y ordenación"]
+    I --> E
+    I --> B
+    E --> I
+    E --> B
+    B --> I
+    B -- "libro seleccionado" --> E
+```
 
 ## Estructura del repositorio
 
@@ -98,7 +112,7 @@ java -cp build/classes com.entrega2.main.Main
 
 ## Estado y limitaciones
 
-La compilación con `javac` está comprobada con OpenJDK 17. `ant run` y el arranque de la interfaz gráfica no se han probado. El repositorio no incluye capturas de pantalla; las imágenes de `src/images/` son los iconos de los botones.
+La compilación con `javac` y el arranque de la interfaz gráfica están comprobados con OpenJDK 17 (capturas de arriba); `ant run` no se ha probado. Detalles visibles en las capturas: los precios se muestran sin formato fijo de dos decimales (`11.4`, `9.9`), la lista de edición recorta el ISBN y, con el tamaño mínimo de la vista inicial (370x235), el botón de edición queda truncado (la captura usa una ventana algo más ancha).
 
 ## Autoría
 
